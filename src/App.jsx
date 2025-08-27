@@ -21,14 +21,14 @@ function App() {
   const experienceData = [
     {
       id: 1,
-      title: "Incoming Machine Learning Research Assistant",
-      company: "University of Tennessee",
+      title: "AI/ML Research Assistant",
+      company: "Multimodal Analysis, Reasoning, and Computational Imaging",
       logo: UTKLogo,
       location: "Knoxville, TN",
       period: "August 2025 - Present",
       technologies: ["Python", "React", "Azure"],
       description: [
-        "Leading full-stack development for NLP-based research project funded by Oak Ridge National Laboratory."
+        "Leading development of infrastructure for national security initiative sponsored by Oak Ridge National Laboratory"
       ]
     },
     {
