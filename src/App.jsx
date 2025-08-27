@@ -375,7 +375,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Download Resume
+            View Resume
           </a>
         </div>
         <div className="content-area" ref={contentAreaRef}>
