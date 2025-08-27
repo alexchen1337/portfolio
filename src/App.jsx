@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "./App.css";
 import NexusLogo from "./assets/Nexus.png";
 import AtlasLogo from "./assets/Atlas Esport Consulting.jpg";
 import UTKLogo from "./assets/University of Tennessee Knoxville.png";
 import MeImg from "./assets/Me.jpg";
 import ResumePDF from "./assets/Alex_Chen_Resume.pdf";
+import { AnimatePresence, motion } from "framer-motion";
+import BackgroundCanvas from "./components/BackgroundCanvas";
+import { Toaster, toast } from "react-hot-toast";
+import TimelineItem from "./components/TimelineItem";
+import ProjectCard from "./components/ProjectCard";
 
 function App() {
   const [activeTab, setActiveTab] = useState('experience');
@@ -17,6 +23,35 @@ function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Deep link: sync tab with URL (?tab=experience|projects|skills)
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab && ['experience','projects','skills'].includes(tab)) setActiveTab(tab);
+  }, []);
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('tab', activeTab);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, '', newUrl);
+  }, [activeTab]);
+
+  // Keyboard shortcuts: 1/2/3 to switch tabs, ESC to close modals
+  React.useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        if (modalExp) setModalExp(null);
+        if (modalProject) setModalProject(null);
+      }
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+      if (e.key === '1') setActiveTab('experience');
+      if (e.key === '2') setActiveTab('projects');
+      if (e.key === '3') setActiveTab('skills');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [modalExp, modalProject]);
 
   const experienceData = [
     {
@@ -129,93 +164,93 @@ function App() {
 
   const renderExperienceTimeline = () => (
     <div className="timeline">
-      {experienceData.map((exp, idx) => (
-        <div key={exp.id} className="timeline-item" onClick={() => setModalExp(exp)}>
-          <div className="timeline-dot" />
-          <div className="timeline-content">
-            <img src={exp.logo} alt={exp.company + ' logo'} className="timeline-logo" />
-            <div>
-              <div className="timeline-title">{exp.title}</div>
-              <div className="timeline-company">{exp.company}</div>
-            </div>
-            {!isMobile && <div className="timeline-period">{exp.period}</div>}
-          </div>
-          {isMobile && <div className="timeline-period" style={{marginTop: '0.5rem'}}>{exp.period}</div>}
-        </div>
+      {experienceData.map((exp) => (
+        <TimelineItem key={exp.id} exp={exp} isMobile={isMobile} onClick={setModalExp} />
       ))}
       <div className="timeline-line" />
     </div>
   );
 
   const renderModal = () => (
-    modalExp && (
-      <div className="exp-modal-overlay" onClick={() => setModalExp(null)}>
-        <div className="exp-modal" onClick={e => e.stopPropagation()}>
-          <img src={modalExp.logo} alt={modalExp.company + ' logo'} className="modal-logo" />
-          <div className="modal-header">
-            <div className="modal-title">{modalExp.title}</div>
-            <div className="modal-company">
-              {modalExp.companyLink ? (
-                <a href={modalExp.companyLink} className="card-title-link" target="_blank" rel="noopener noreferrer">{modalExp.company}</a>
-              ) : (
-                <span>{modalExp.company}</span>
-              )}
-            </div>
-            <div className="modal-meta">{modalExp.location} • {modalExp.period}</div>
-          </div>
-          <div className="modal-tech">
-            <span>Technologies:</span>
-            {modalExp.technologies.map((tech, i) => (
-              <span key={i} className="modal-tech-tag">{tech}</span>
-            ))}
-          </div>
-          {Array.isArray(modalExp.description)
-            ? modalExp.description.map((desc, i) => <p key={i} className="modal-desc-paragraph">{desc}</p>)
-            : <p className="modal-desc-paragraph">{modalExp.description}</p>
-          }
-          <button className="modal-close" onClick={() => setModalExp(null)}>Close</button>
-        </div>
-      </div>
-    )
+    modalExp
+      ? createPortal(
+          (
+            <AnimatePresence>
+              <motion.div className="exp-modal-overlay" onClick={() => setModalExp(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <motion.div className="exp-modal" onClick={e => e.stopPropagation()} initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.97, opacity: 0 }} transition={{ duration: 0.18 }}>
+                <img src={modalExp.logo} alt={modalExp.company + ' logo'} className="modal-logo" />
+                <div className="modal-header">
+                  <div className="modal-title">{modalExp.title}</div>
+                  <div className="modal-company">
+                    {modalExp.companyLink ? (
+                      <a href={modalExp.companyLink} className="card-title-link" target="_blank" rel="noopener noreferrer">{modalExp.company}</a>
+                    ) : (
+                      <span>{modalExp.company}</span>
+                    )}
+                  </div>
+                  <div className="modal-meta">{modalExp.location} • {modalExp.period}</div>
+                </div>
+                 <div className="modal-tech">
+                  <span>Technologies:</span>
+                  {modalExp.technologies.map((tech, i) => (
+                    <span key={i} className="modal-tech-tag">{tech}</span>
+                  ))}
+                </div>
+                {Array.isArray(modalExp.description)
+                  ? modalExp.description.map((desc, i) => <p key={i} className="modal-desc-paragraph">{desc}</p>)
+                  : <p className="modal-desc-paragraph">{modalExp.description}</p>
+                 }
+                 <button className="modal-close" onClick={() => setModalExp(null)}>Close</button>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          ),
+          document.body
+        )
+      : null
   );
 
   const renderProjects = () => (
     <div className="content-grid">
       {projectsData.map(project => (
-        <div key={project.id} className="content-card" onClick={() => setModalProject(project)}>
-          <h3 className="card-title-link">{project.title}</h3>
-          <p className="card-subtitle project-short-desc">{project.short}</p>
-        </div>
+        <ProjectCard key={project.id} project={project} onClick={setModalProject} />
       ))}
     </div>
   );
 
   const renderProjectModal = () => (
-    modalProject && (
-      <div className="exp-modal-overlay" onClick={() => setModalProject(null)}>
-        <div className="exp-modal" onClick={e => e.stopPropagation()}>
-          <div className="modal-header">
-            <div className="modal-title">{modalProject.title}</div>
-            {modalProject.link && (
-              <a href={modalProject.link} className="modal-title-link" target="_blank" rel="noopener noreferrer">Project Link</a>
-            )}
-            <div className="modal-company">{Array.isArray(modalProject.tech) ? modalProject.tech.join(', ') : modalProject.tech}</div>
-          </div>
-          <div className="modal-tech">
-            <span>Technologies:</span>
-            {Array.isArray(modalProject.tech) ? modalProject.tech.map((tech, i) => (
-              <span key={i} className="modal-tech-tag">{tech}</span>
-            )) : (
-              <span className="modal-tech-tag">{modalProject.tech}</span>
-            )}
-          </div>
-          <ul className="modal-desc">
-            {modalProject.description.map((desc, i) => <li key={i}>{desc}</li>)}
-          </ul>
-          <button className="modal-close" onClick={() => setModalProject(null)}>Close</button>
-        </div>
-      </div>
-    )
+    modalProject
+      ? createPortal(
+          (
+            <AnimatePresence>
+              <motion.div className="exp-modal-overlay" onClick={() => setModalProject(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <motion.div className="exp-modal" onClick={e => e.stopPropagation()} initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.97, opacity: 0 }} transition={{ duration: 0.18 }}>
+                <div className="modal-header">
+                  <div className="modal-title">{modalProject.title}</div>
+                  {modalProject.link && (
+                    <a href={modalProject.link} className="modal-title-link" target="_blank" rel="noopener noreferrer">Project Link</a>
+                  )}
+                  <div className="modal-company">{Array.isArray(modalProject.tech) ? modalProject.tech.join(', ') : modalProject.tech}</div>
+                </div>
+                <div className="modal-tech">
+                  <span>Technologies:</span>
+                  {Array.isArray(modalProject.tech) ? modalProject.tech.map((tech, i) => (
+                    <span key={i} className="modal-tech-tag">{tech}</span>
+                  )) : (
+                    <span className="modal-tech-tag">{modalProject.tech}</span>
+                  )}
+                 </div>
+                 <ul className="modal-desc">
+                  {modalProject.description.map((desc, i) => <li key={i}>{desc}</li>)}
+                </ul>
+                 <button className="modal-close" onClick={() => setModalProject(null)}>Close</button>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          ),
+          document.body
+        )
+      : null
   );
 
   const renderContent = () => {
@@ -254,8 +289,11 @@ function App() {
     }
   };
 
+  const contentAreaRef = useRef(null);
+
   return (
     <div className="app-container">
+      <Toaster position="bottom-center" />
       <div className="sidebar">
         <div className="profile-section">
           <div className="profile-image" style={{ backgroundImage: `url(${MeImg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
@@ -265,7 +303,29 @@ function App() {
           <p className="profile-bio">I love to build things. I'm really into Anime, Music, Fashion, and Video Games.</p>
           <div className="contact-label">Contact</div>
           <div className="contact-info retro-contact">
-            <a href="mailto:alex.ch7@outlook.com" target="_blank" rel="noopener noreferrer" className="retro-link">
+            <a
+              href="mailto:alex.ch7@outlook.com"
+              className="retro-link"
+              onClick={(e)=>{
+                if (e.ctrlKey || e.metaKey) return;
+                e.preventDefault();
+                navigator.clipboard.writeText('alex.ch7@outlook.com');
+                toast.success('Email copied', {
+                  icon: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="9" stroke="#a855f7" strokeWidth="2"/>
+                      <path d="M7 12.5l3 3 7-7" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  style: {
+                    background: '#0e0e13',
+                    color: '#fff',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.35)'
+                  },
+                });
+              }}
+            >
               <span className="retro-icon">
                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
               </span>
@@ -293,24 +353,48 @@ function App() {
             onClick={() => setActiveTab('experience')}
           >
             Relevant Experience
+            {activeTab === 'experience' && <motion.div layoutId="tab-underline" className="tab-underline" />}
           </button>
           <button 
             className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
             onClick={() => setActiveTab('projects')}
           >
             Projects
+            {activeTab === 'projects' && <motion.div layoutId="tab-underline" className="tab-underline" />}
           </button>
           <button 
             className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
             onClick={() => setActiveTab('skills')}
           >
             Skills
-        </button>
-          <a href={ResumePDF} className="resume-btn" target="_blank" rel="noopener noreferrer">Download Resume</a>
+            {activeTab === 'skills' && <motion.div layoutId="tab-underline" className="tab-underline" />}
+          </button>
+          <a
+            href={ResumePDF}
+            className="resume-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Resume
+          </a>
         </div>
-        <div className="content-area">
+        <div className="content-area" ref={contentAreaRef}>
           <div className="content-window">
-            {renderContent()}
+            <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+              <BackgroundCanvas />
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                style={{ position: 'relative', zIndex: 1 }}
+              >
+                {renderContent()}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

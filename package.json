@@ -5,15 +5,21 @@
   "type": "module",
   "homepage": "https://alexchen1337.github.io/dev",
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "deploy": "gh-pages -d dist"
-},
-
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^12.23.12",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.9.1",
+    "vanilla-tilt": "^1.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
