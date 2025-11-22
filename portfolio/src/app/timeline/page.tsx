@@ -71,16 +71,18 @@ export default function Experience() {
   ];
 
   if (isMobile) {
+    const reversedExperiences = experiences.slice().reverse();
+    
     return (
       <>
         <div style={{ padding: '2rem 0' }}>
           <h1 style={{ marginBottom: '2rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {experiences.slice().reverse().map((exp, index) => (
+            {reversedExperiences.map((exp, index) => (
               <div
                 key={index}
-                onClick={() => setSelectedExp(index)}
+                onClick={() => setSelectedExp(experiences.length - 1 - index)}
                 style={{
                   padding: '1.5rem',
                   backgroundColor: '#fff',
