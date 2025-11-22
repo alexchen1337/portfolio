@@ -62,7 +62,7 @@ export default function Experience() {
 
   return (
     <>
-      <div style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
+      <div className="timeline-wrapper" style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
         <h1 className="timeline-title" style={{ marginBottom: '4rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
         
         <div className="timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
@@ -310,13 +310,22 @@ export default function Experience() {
         }
         
         @media (max-width: 768px) {
+          .timeline-wrapper {
+            width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding: 2rem 0 !important;
+          }
+          
           .timeline-title {
             font-size: 2rem !important;
-            margin-bottom: 2.5rem !important;
+            margin-bottom: 2rem !important;
+            padding: 0 1rem !important;
           }
           
           .timeline-container {
-            padding: 0 1rem !important;
+            padding: 0 !important;
+            max-width: 100% !important;
           }
           
           .timeline-line {
@@ -325,12 +334,14 @@ export default function Experience() {
           
           .timeline-grid {
             grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
+            gap: 1rem !important;
+            padding: 0 !important;
           }
           
           .timeline-item {
             height: auto !important;
             padding: 0 !important;
+            display: block !important;
           }
           
           .timeline-dot {
@@ -346,6 +357,9 @@ export default function Experience() {
             transform: none !important;
             max-width: 100% !important;
             margin: 0 !important;
+            left: auto !important;
+            top: auto !important;
+            bottom: auto !important;
           }
           
           .modal-content {
