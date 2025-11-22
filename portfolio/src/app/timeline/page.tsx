@@ -63,11 +63,10 @@ export default function Experience() {
   return (
     <>
       <div style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
-        <h1 style={{ marginBottom: '4rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
+        <h1 className="timeline-title" style={{ marginBottom: '4rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
         
-        <div style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
-          {/* Horizontal timeline line */}
-          <div style={{
+        <div className="timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
+          <div className="timeline-line" style={{
             position: 'absolute',
             top: '50%',
             left: '0',
@@ -78,7 +77,7 @@ export default function Experience() {
             transform: 'translateY(-50%)'
           }} />
 
-          <div style={{
+          <div className="timeline-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '2rem',
@@ -91,6 +90,7 @@ export default function Experience() {
               return (
                 <div 
                   key={index}
+                  className="timeline-item"
                   style={{
                     position: 'relative',
                     height: '300px',
@@ -100,8 +100,7 @@ export default function Experience() {
                     alignItems: 'center'
                   }}
                 >
-                  {/* Timeline dot */}
-                  <div style={{
+                  <div className="timeline-dot" style={{
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
@@ -115,29 +114,28 @@ export default function Experience() {
                     transition: 'all 0.3s ease'
                   }} />
 
-                  {/* Connector Line */}
-                  <div style={{
+                  <div className="timeline-connector" style={{
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
                     width: '1px',
-                    height: '60px',  // Increased height for better spacing
+                    height: '60px',
                     backgroundColor: '#e5e5e5',
                     transform: `translate(-50%, ${isTop ? '-100%' : '0'})`,
                     zIndex: 0
                   }} />
 
-                  {/* Card */}
                   <div
                     onClick={() => setSelectedExp(index)}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
+                    className="timeline-card"
                     style={{
                       position: 'absolute',
                       top: isTop ? '0' : 'auto',
                       bottom: isTop ? 'auto' : '0',
                       left: '50%',
-                      transform: `translateX(-50%) translateY(${isTop ? '-30px' : '30px'})`, // Increased vertical spacing
+                      transform: `translateX(-50%) translateY(${isTop ? '-30px' : '30px'})`,
                       width: '100%',
                       maxWidth: '280px',
                       padding: '1.5rem',
@@ -214,6 +212,7 @@ export default function Experience() {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
+            className="modal-content"
             style={{
               backgroundColor: '#fff',
               padding: '3rem',
@@ -304,10 +303,67 @@ export default function Experience() {
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
+          .timeline-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .timeline-title {
+            font-size: 2rem !important;
+            margin-bottom: 2.5rem !important;
+          }
+          
+          .timeline-container {
+            padding: 0 1rem !important;
+          }
+          
+          .timeline-line {
+            display: none !important;
+          }
+          
           .timeline-grid {
             grid-template-columns: 1fr !important;
-            gap: 3rem !important;
+            gap: 1.5rem !important;
+          }
+          
+          .timeline-item {
+            height: auto !important;
+            padding: 0 !important;
+          }
+          
+          .timeline-dot {
+            display: none !important;
+          }
+          
+          .timeline-connector {
+            display: none !important;
+          }
+          
+          .timeline-card {
+            position: static !important;
+            transform: none !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+          }
+          
+          .modal-content {
+            padding: 2rem !important;
+          }
+          
+          .modal-content h2 {
+            font-size: 1.5rem !important;
+          }
+          
+          .modal-content p, .modal-content ul {
+            font-size: 1rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .modal-content {
+            padding: 1.5rem !important;
           }
         }
       `}</style>

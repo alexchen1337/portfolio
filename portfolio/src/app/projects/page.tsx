@@ -137,7 +137,7 @@ export default function Projects() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: '2rem' }}>Projects</h1>
+      <h1 className="projects-title" style={{ marginBottom: '2rem' }}>Projects</h1>
       <div 
         ref={scrollContainerRef}
         className="full-width-scroll hide-scrollbar"
@@ -199,6 +199,38 @@ export default function Projects() {
           z-index: 10 !important;
           border-color: transparent !important;
           border-radius: 12px;
+        }
+        
+        @media (max-width: 768px) {
+          .projects-title {
+            font-size: 2rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          .project-card {
+            min-width: 280px !important;
+            max-width: 280px !important;
+            padding: 1.5rem !important;
+          }
+          
+          .project-card h3 {
+            font-size: 1.1rem !important;
+          }
+          
+          .project-card p {
+            font-size: 0.9rem !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .projects-title {
+            font-size: 1.75rem !important;
+          }
+          
+          .project-card {
+            min-width: 260px !important;
+            max-width: 260px !important;
+          }
         }
       `}</style>
     </div>

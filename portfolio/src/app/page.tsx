@@ -84,6 +84,7 @@ export default function Home() {
           <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
             <button
               onClick={() => setShowResumeModal(true)}
+              className="resume-button"
               style={{
                 padding: '0.75rem 1.5rem',
                 backgroundColor: '#111',
@@ -119,7 +120,8 @@ export default function Home() {
           overflow: 'hidden',
           boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
           transform: 'rotate(3deg)',
-          transition: 'transform 0.3s ease'
+          transition: 'transform 0.3s ease',
+          margin: '0 auto'
         }} className="profile-image">
           <Image 
             src="/profile.jpg" 
@@ -152,6 +154,7 @@ export default function Home() {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
+            className="modal-content"
             style={{
               backgroundColor: '#fff',
               padding: '2.5rem',
@@ -269,11 +272,36 @@ export default function Home() {
           }
           
           .hero-section h1 {
-            fontSize: 2.5rem !important;
+            font-size: 2rem !important;
           }
           
           .hero-section p {
             margin: 0 auto;
+            font-size: 1rem !important;
+          }
+          
+          .profile-image {
+            width: 200px !important;
+            height: 200px !important;
+          }
+          
+          .hero-section > div:first-child {
+            min-width: auto !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .hero-section h1 {
+            font-size: 1.75rem !important;
+          }
+          
+          .modal-content {
+            padding: 1.5rem !important;
+          }
+          
+          .resume-button {
+            padding: 0.85rem 1.75rem !important;
+            font-size: 1rem !important;
           }
         }
       `}</style>

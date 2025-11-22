@@ -98,6 +98,7 @@ export default function Header() {
         >
           <div 
             onClick={(e) => e.stopPropagation()}
+            className="modal-content"
             style={{
               backgroundColor: 'var(--background)',
               padding: '2rem',
@@ -142,6 +143,13 @@ export default function Header() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .modal-content {
+            padding: 1.5rem !important;
+            max-width: calc(100vw - 2rem) !important;
           }
         }
       `}</style>
