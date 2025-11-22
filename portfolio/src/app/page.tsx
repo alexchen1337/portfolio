@@ -81,7 +81,7 @@ export default function Home() {
             Let's talk
           </p>
           
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+          <div className="button-container" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
             <button
               onClick={() => setShowResumeModal(true)}
               className="resume-button"
@@ -287,6 +287,10 @@ export default function Home() {
           
           .hero-section > div:first-child {
             min-width: auto !important;
+          }
+          
+          .button-container {
+            justify-content: center !important;
           }
         }
         
