@@ -117,7 +117,7 @@ export default function Projects() {
     },
     {
       title: "Smart Ride",
-      description: "Machine learning analysis on Uber dataset to predict ride patterns and optimize routes.",
+      description: "Machine learning analysis on Uber dataset to predict if a ride is profitable.",
       link: "https://github.com/ericcht/Smart-Ride"
     },
     {

@@ -1,11 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Experience() {
   const [selectedExp, setSelectedExp] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+ 
   const experiences = [
     {
       year: "Winter 2025",
@@ -59,6 +69,169 @@ export default function Experience() {
       ]
     }
   ];
+
+  if (isMobile) {
+    return (
+      <>
+        <div style={{ padding: '2rem 0' }}>
+          <h1 style={{ marginBottom: '2rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {experiences.slice().reverse().map((exp, index) => (
+              <div
+                key={index}
+                onClick={() => setSelectedExp(index)}
+                style={{
+                  padding: '1.5rem',
+                  backgroundColor: '#fff',
+                  borderRadius: '12px',
+                  border: '1px solid #eaeaea',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <div style={{
+                  fontSize: '0.75rem',
+                  fontWeight: '600',
+                  color: '#666',
+                  marginBottom: '0.5rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  {exp.year}
+                </div>
+
+                <h3 style={{
+                  fontSize: '1.1rem',
+                  fontWeight: '700',
+                  marginBottom: '0.25rem',
+                  color: '#111',
+                  lineHeight: '1.3'
+                }}>
+                  {exp.title}
+                </h3>
+
+                <div style={{
+                  fontSize: '0.9rem',
+                  color: '#444',
+                  marginBottom: '0.25rem'
+                }}>
+                  {exp.company}
+                </div>
+
+                <div style={{
+                  fontSize: '0.8rem',
+                  color: '#888'
+                }}>
+                  {exp.location}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {selectedExp !== null && (
+          <div 
+            onClick={() => setSelectedExp(null)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 9999,
+              backdropFilter: 'blur(8px)',
+              padding: '1rem'
+            }}
+          >
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                backgroundColor: '#fff',
+                padding: '1.5rem',
+                borderRadius: '16px',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                maxWidth: '600px',
+                width: '100%',
+                maxHeight: '85vh',
+                overflowY: 'auto'
+              }}
+            >
+              <div style={{ 
+                fontSize: '0.75rem', 
+                fontWeight: '600', 
+                color: '#666',
+                marginBottom: '0.5rem',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase'
+              }}>
+                {experiences[selectedExp].year}
+              </div>
+              
+              <h2 style={{ marginBottom: '0.5rem', fontSize: '1.5rem', fontWeight: '700', letterSpacing: '-0.02em' }}>
+                {experiences[selectedExp].title}
+              </h2>
+              
+              <div style={{ 
+                fontSize: '1rem', 
+                marginBottom: '1.5rem', 
+                color: '#444',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.25rem'
+              }}>
+                <span style={{ fontWeight: '500' }}>{experiences[selectedExp].company}</span>
+                <span style={{ color: '#666', fontSize: '0.9rem' }}>{experiences[selectedExp].location}</span>
+              </div>
+              
+              <p style={{ marginBottom: '2rem', fontSize: '1rem', lineHeight: '1.6', color: '#444' }}>
+                {experiences[selectedExp].description}
+              </p>
+              
+              <h3 style={{ marginBottom: '0.75rem', fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#888' }}>
+                Key Responsibilities
+              </h3>
+              
+              <ul style={{ 
+                margin: 0, 
+                paddingLeft: '1.2rem',
+                fontSize: '0.95rem',
+                lineHeight: '1.6',
+                marginBottom: '2rem',
+                color: '#333'
+              }}>
+                {experiences[selectedExp].details.map((detail, i) => (
+                  <li key={i} style={{ marginBottom: '0.5rem' }}>{detail}</li>
+                ))}
+              </ul>
+              
+              <button
+                onClick={() => setSelectedExp(null)}
+                style={{
+                  padding: '0.85rem 1.5rem',
+                  backgroundColor: '#111',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '0.95rem',
+                  fontWeight: '500',
+                  width: '100%'
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
 
   return (
     <>
@@ -306,78 +479,6 @@ export default function Experience() {
         @media (max-width: 1024px) {
           .timeline-grid {
             grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .timeline-wrapper {
-            width: 100% !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            padding: 2rem 0 !important;
-          }
-          
-          .timeline-title {
-            font-size: 2rem !important;
-            margin-bottom: 2rem !important;
-            padding: 0 1rem !important;
-          }
-          
-          .timeline-container {
-            padding: 0 !important;
-            max-width: 100% !important;
-          }
-          
-          .timeline-line {
-            display: none !important;
-          }
-          
-          .timeline-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1rem !important;
-            padding: 0 !important;
-          }
-          
-          .timeline-item {
-            height: auto !important;
-            padding: 0 !important;
-            display: block !important;
-          }
-          
-          .timeline-dot {
-            display: none !important;
-          }
-          
-          .timeline-connector {
-            display: none !important;
-          }
-          
-          .timeline-card {
-            position: static !important;
-            transform: none !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            left: auto !important;
-            top: auto !important;
-            bottom: auto !important;
-          }
-          
-          .modal-content {
-            padding: 2rem !important;
-          }
-          
-          .modal-content h2 {
-            font-size: 1.5rem !important;
-          }
-          
-          .modal-content p, .modal-content ul {
-            font-size: 1rem !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .modal-content {
-            padding: 1.5rem !important;
           }
         }
       `}</style>
