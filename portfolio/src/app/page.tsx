@@ -78,7 +78,7 @@ export default function Home() {
             Junior @ UT Knoxville studying Computer Science
           </p>
           <p style={{ fontSize: '1.05rem', color: '#666', lineHeight: '1.6', marginBottom: '0', maxWidth: '540px' }}>
-            Let's talk
+            Connect with me or request my resume
           </p>
           
           <div className="button-container" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
