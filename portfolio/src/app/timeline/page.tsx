@@ -90,7 +90,9 @@ export default function Experience() {
                   border: '1px solid #eaeaea',
                   cursor: 'pointer',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
               >
                 <div style={{
@@ -124,9 +126,21 @@ export default function Experience() {
 
                 <div style={{
                   fontSize: '0.8rem',
-                  color: '#888'
+                  color: '#888',
+                  marginBottom: '0.75rem'
                 }}>
                   {exp.location}
+                </div>
+
+                <div style={{
+                  fontSize: '0.75rem',
+                  color: '#666',
+                  fontStyle: 'italic',
+                  marginTop: 'auto',
+                  paddingTop: '0.5rem',
+                  borderTop: '1px solid #f0f0f0'
+                }}>
+                  Click for more details
                 </div>
               </div>
             ))}
@@ -323,7 +337,9 @@ export default function Experience() {
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
                       boxShadow: isHovered ? '0 8px 30px rgba(0,0,0,0.12)' : '0 4px 6px rgba(0,0,0,0.04)',
-                      zIndex: 5
+                      zIndex: 5,
+                      display: 'flex',
+                      flexDirection: 'column'
                     }}
                   >
                     <div style={{
@@ -357,9 +373,22 @@ export default function Experience() {
 
                     <div style={{
                       fontSize: '0.8rem',
-                      color: '#888'
+                      color: '#888',
+                      marginBottom: '0.75rem'
                     }}>
                       {exp.location}
+                    </div>
+
+                    <div style={{
+                      fontSize: '0.7rem',
+                      color: '#999',
+                      fontStyle: 'italic',
+                      marginTop: 'auto',
+                      paddingTop: '0.75rem',
+                      borderTop: '1px solid #f0f0f0',
+                      textAlign: 'center'
+                    }}>
+                      Click for more details
                     </div>
                   </div>
                 </div>
