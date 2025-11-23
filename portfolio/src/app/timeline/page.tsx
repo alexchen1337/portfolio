@@ -76,7 +76,8 @@ export default function Experience() {
     return (
       <>
         <div style={{ padding: '2rem 0' }}>
-          <h1 style={{ marginBottom: '2rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
+          <h1 style={{ marginBottom: '0.5rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
+          <p style={{ marginBottom: '2rem', fontSize: '0.9rem', color: '#666' }}>(Click a card for more info)</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {reversedExperiences.map((exp, index) => (
@@ -90,9 +91,7 @@ export default function Experience() {
                   border: '1px solid #eaeaea',
                   cursor: 'pointer',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                  transition: 'all 0.2s ease',
-                  display: 'flex',
-                  flexDirection: 'column'
+                  transition: 'all 0.2s ease'
                 }}
               >
                 <div style={{
@@ -126,21 +125,9 @@ export default function Experience() {
 
                 <div style={{
                   fontSize: '0.8rem',
-                  color: '#888',
-                  marginBottom: '0.75rem'
+                  color: '#888'
                 }}>
                   {exp.location}
-                </div>
-
-                <div style={{
-                  fontSize: '0.75rem',
-                  color: '#666',
-                  fontStyle: 'italic',
-                  marginTop: 'auto',
-                  paddingTop: '0.5rem',
-                  borderTop: '1px solid #f0f0f0'
-                }}>
-                  Click for more details
                 </div>
               </div>
             ))}
@@ -254,7 +241,8 @@ export default function Experience() {
   return (
     <>
       <div className="timeline-wrapper" style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
-        <h1 className="timeline-title" style={{ marginBottom: '4rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
+        <h1 className="timeline-title" style={{ marginBottom: '0.5rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
+        <p style={{ marginBottom: '4rem', fontSize: '1rem', textAlign: 'center', color: '#666' }}>(Click a card for more info)</p>
         
         <div className="timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
           <div className="timeline-line" style={{
@@ -337,9 +325,7 @@ export default function Experience() {
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
                       boxShadow: isHovered ? '0 8px 30px rgba(0,0,0,0.12)' : '0 4px 6px rgba(0,0,0,0.04)',
-                      zIndex: 5,
-                      display: 'flex',
-                      flexDirection: 'column'
+                      zIndex: 5
                     }}
                   >
                     <div style={{
@@ -373,22 +359,9 @@ export default function Experience() {
 
                     <div style={{
                       fontSize: '0.8rem',
-                      color: '#888',
-                      marginBottom: '0.75rem'
+                      color: '#888'
                     }}>
                       {exp.location}
-                    </div>
-
-                    <div style={{
-                      fontSize: '0.7rem',
-                      color: '#999',
-                      fontStyle: 'italic',
-                      marginTop: 'auto',
-                      paddingTop: '0.75rem',
-                      borderTop: '1px solid #f0f0f0',
-                      textAlign: 'center'
-                    }}>
-                      Click for more details
                     </div>
                   </div>
                 </div>
