@@ -34,7 +34,7 @@ export default function Experience() {
       title: "Software Engineer",
       company: "MARCI Lab",
       location: "Remote",
-      description: "Developing secure ML application for the Defense Counterintelligence and Security Agency and ORNL.",
+      description: "",
       details: [
         "Built Next.js frontend with TypeScript for ML application interface",
         "Developed Python FastAPI backend for model training and inference",
@@ -47,7 +47,7 @@ export default function Experience() {
       title: "Software Engineer Intern",
       company: "Nexus",
       location: "Knoxville, TN",
-      description: "Established job-queue monitoring tool and resolved React Native state management issues.",
+      description: "",
       details: [
         "Created monitoring dashboard for Virtual Machine error tracking",
         "Fixed React Native race conditions improving app stability by 11%",
@@ -60,7 +60,7 @@ export default function Experience() {
       title: "AI/ML Research Assistant",
       company: "Zhao Robot Lab",
       location: "Knoxville, TN",
-      description: "Leveraged LLMs for Alzheimer's research and integrated vector search using FAISS.",
+      description: "",
       details: [
         "Utilized GPT and Gemini to extract linguistic patterns from patient responses",
         "Implemented FAISS vector search improving data indexing precision by 27%",
@@ -235,6 +235,8 @@ export default function Experience() {
     );
   }
 
+  const reversedExperiences = experiences.slice().reverse();
+  
   return (
     <>
       <div className="timeline-wrapper" style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
@@ -258,8 +260,9 @@ export default function Experience() {
             gap: '2rem',
             position: 'relative'
           }}>
-            {experiences.slice().reverse().map((exp, index) => {
-              const isHovered = hoveredIndex === index;
+            {reversedExperiences.map((exp, index) => {
+              const originalIndex = experiences.length - 1 - index;
+              const isHovered = hoveredIndex === originalIndex;
               const isTop = index % 2 === 0;
               
               return (
@@ -301,8 +304,8 @@ export default function Experience() {
                   }} />
 
                   <div
-                    onClick={() => setSelectedExp(index)}
-                    onMouseEnter={() => setHoveredIndex(index)}
+                    onClick={() => setSelectedExp(originalIndex)}
+                    onMouseEnter={() => setHoveredIndex(originalIndex)}
                     onMouseLeave={() => setHoveredIndex(null)}
                     className="timeline-card"
                     style={{
