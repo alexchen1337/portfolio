@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import PageTransition from "./components/PageTransition";
 
 export default function Home() {
   const [showResumeModal, setShowResumeModal] = useState(false);
@@ -61,140 +60,80 @@ export default function Home() {
   };
 
   return (
-    <>
-      <PageTransition>
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '60vh', justifyContent: 'center' }}>
-          <section style={{ 
-            display: 'flex', 
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '4rem',
-            flexWrap: 'wrap-reverse'
-          }} className="hero-section">
-            
-            <div style={{ flex: '1', minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <h1 className="animate-item stagger-1" style={{ fontSize: '2.3rem', lineHeight: '1.1', marginBottom: '0', letterSpacing: '-0.02em' }}>
-                Hi, I'm Alex
-              </h1>
-              <p className="animate-item stagger-2" style={{ fontSize: '1.05rem', color: '#666', lineHeight: '1.6', marginBottom: '0', maxWidth: '540px' }}>
-                Junior @ UT Knoxville studying Computer Science
-              </p>
-              <p className="animate-item stagger-3" style={{ fontSize: '1.05rem', color: '#666', lineHeight: '1.6', marginBottom: '0', maxWidth: '540px' }}>
-                Connect with me or request my resume
-              </p>
-              
-              <div className="button-container animate-item stagger-4" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                <button
-                  onClick={() => setShowResumeModal(true)}
-                  className="resume-button"
-                  style={{
-                    padding: '0.75rem 1.5rem',
-                    backgroundColor: '#111',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '0.95rem',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-                  }}
-                >
-                  Request Resume
-                </button>
-              </div>
-            </div>
-            
-            <div className="profile-image animate-scale stagger-2" style={{ 
-              position: 'relative',
-              width: '280px',
-              height: '280px',
-              flexShrink: 0,
-              borderRadius: '20px',
-              overflow: 'hidden',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-              transform: 'rotate(3deg)',
-              transition: 'transform 0.3s ease',
-              margin: '0 auto'
-            }}>
-              <Image 
-                src="/profile.jpg" 
-                alt="Alex Chen" 
-                fill
-                style={{ objectFit: 'cover' }} 
-                priority
-              />
-            </div>
-          </section>
-
-          <style jsx>{`
-            .profile-image:hover {
-              transform: rotate(0deg) scale(1.02) !important;
-            }
-            
-            @keyframes modalSlideUp {
-              from { opacity: 0; transform: translateY(20px) scale(0.96); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
-            }
-            
-            @media (max-width: 768px) {
-              .hero-section {
-                flex-direction: column-reverse !important;
-                gap: 2rem !important;
-                text-align: center;
-                justify-content: center;
-              }
-              
-              .hero-section h1 {
-                font-size: 2rem !important;
-              }
-              
-              .hero-section p {
-                margin: 0 auto;
-                font-size: 1rem !important;
-              }
-              
-              .profile-image {
-                width: 200px !important;
-                height: 200px !important;
-              }
-              
-              .hero-section > div:first-child {
-                min-width: auto !important;
-              }
-              
-              .button-container {
-                justify-content: center !important;
-              }
-            }
-            
-            @media (max-width: 480px) {
-              .hero-section h1 {
-                font-size: 1.75rem !important;
-              }
-              
-              .modal-content {
-                padding: 1.5rem !important;
-              }
-              
-              .resume-button {
-                padding: 0.85rem 1.75rem !important;
-                font-size: 1rem !important;
-              }
-            }
-          `}</style>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '60vh', justifyContent: 'center' }}>
+      <section style={{ 
+        display: 'flex', 
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '4rem',
+        flexWrap: 'wrap-reverse'
+      }} className="hero-section">
+        
+        <div style={{ flex: '1', minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <h1 style={{ fontSize: '2.3rem', lineHeight: '1.1', marginBottom: '0', letterSpacing: '-0.02em' }}>
+            Hi, I'm Alex
+          </h1>
+          <p style={{ fontSize: '1.05rem', color: '#666', lineHeight: '1.6', marginBottom: '0', maxWidth: '540px' }}>
+            Junior @ UT Knoxville studying Computer Science
+          </p>
+          <p style={{ fontSize: '1.05rem', color: '#666', lineHeight: '1.6', marginBottom: '0', maxWidth: '540px' }}>
+            Connect with me or request my resume
+          </p>
+          
+          <div className="button-container" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+            <button
+              onClick={() => setShowResumeModal(true)}
+              className="resume-button"
+              style={{
+                padding: '0.75rem 1.5rem',
+                backgroundColor: '#111',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '0.95rem',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+              }}
+            >
+              Request Resume
+            </button>
+          </div>
         </div>
-      </PageTransition>
+        
+        <div style={{ 
+          position: 'relative',
+          width: '280px',
+          height: '280px',
+          flexShrink: 0,
+          borderRadius: '20px',
+          overflow: 'hidden',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+          transform: 'rotate(3deg)',
+          transition: 'transform 0.3s ease',
+          margin: '0 auto'
+        }} className="profile-image">
+          <Image 
+            src="/profile.jpg" 
+            alt="Alex Chen" 
+            fill
+            style={{ objectFit: 'cover' }} 
+            priority
+          />
+        </div>
+      </section>
 
+      {/* Resume Request Modal */}
       {showResumeModal && (
         <div 
           onClick={() => setShowResumeModal(false)}
@@ -313,6 +252,63 @@ export default function Home() {
           </div>
         </div>
       )}
-    </>
+
+      <style jsx>{`
+        .profile-image:hover {
+          transform: rotate(0deg) scale(1.02) !important;
+        }
+        
+        @keyframes modalSlideUp {
+          from { opacity: 0; transform: translateY(20px) scale(0.96); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+          .hero-section {
+            flex-direction: column-reverse !important;
+            gap: 2rem !important;
+            text-align: center;
+            justify-content: center;
+          }
+          
+          .hero-section h1 {
+            font-size: 2rem !important;
+          }
+          
+          .hero-section p {
+            margin: 0 auto;
+            font-size: 1rem !important;
+          }
+          
+          .profile-image {
+            width: 200px !important;
+            height: 200px !important;
+          }
+          
+          .hero-section > div:first-child {
+            min-width: auto !important;
+          }
+          
+          .button-container {
+            justify-content: center !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .hero-section h1 {
+            font-size: 1.75rem !important;
+          }
+          
+          .modal-content {
+            padding: 1.5rem !important;
+          }
+          
+          .resume-button {
+            padding: 0.85rem 1.75rem !important;
+            font-size: 1rem !important;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
