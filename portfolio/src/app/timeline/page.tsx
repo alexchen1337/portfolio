@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import PageTransition from '../components/PageTransition';
 
 export default function Experience() {
   const [selectedExp, setSelectedExp] = useState<number | null>(null);
@@ -74,16 +75,17 @@ export default function Experience() {
     const reversedExperiences = experiences.slice().reverse();
     
     return (
-      <>
+      <PageTransition>
         <div style={{ padding: '2rem 0' }}>
-          <h1 style={{ marginBottom: '0.5rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
-          <p style={{ marginBottom: '2rem', fontSize: '0.9rem', color: '#666' }}>(Click a card for more info)</p>
+          <h1 className="animate-item stagger-1" style={{ marginBottom: '0.5rem', fontSize: '2rem', fontWeight: '600' }}>Experience</h1>
+          <p className="animate-item stagger-2" style={{ marginBottom: '2rem', fontSize: '0.9rem', color: '#666' }}>(Click a card for more info)</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {reversedExperiences.map((exp, index) => (
               <div
                 key={index}
                 onClick={() => setSelectedExp(experiences.length - 1 - index)}
+                className={`animate-item stagger-${Math.min(index + 3, 7)}`}
                 style={{
                   padding: '1.5rem',
                   backgroundColor: '#fff',
@@ -232,17 +234,17 @@ export default function Experience() {
             </div>
           </div>
         )}
-      </>
+      </PageTransition>
     );
   }
 
   const reversedExperiences = experiences.slice().reverse();
   
   return (
-    <>
+    <PageTransition>
       <div className="timeline-wrapper" style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
-        <h1 className="timeline-title" style={{ marginBottom: '0.5rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
-        <p style={{ marginBottom: '4rem', fontSize: '1rem', textAlign: 'center', color: '#666' }}>(Click a card for more info)</p>
+        <h1 className="timeline-title animate-item stagger-1" style={{ marginBottom: '0.5rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
+        <p className="animate-item stagger-2" style={{ marginBottom: '4rem', fontSize: '1rem', textAlign: 'center', color: '#666' }}>(Click a card for more info)</p>
         
         <div className="timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
           <div className="timeline-line" style={{
@@ -256,7 +258,7 @@ export default function Experience() {
             transform: 'translateY(-50%)'
           }} />
 
-          <div className="timeline-grid" style={{
+          <div className="timeline-grid animate-fade stagger-3" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '2rem',
@@ -270,7 +272,7 @@ export default function Experience() {
               return (
                 <div 
                   key={index}
-                  className="timeline-item"
+                  className={`timeline-item animate-item stagger-${Math.min(index + 4, 7)}`}
                   style={{
                     position: 'relative',
                     height: '300px',
@@ -489,6 +491,6 @@ export default function Experience() {
           }
         }
       `}</style>
-    </>
+    </PageTransition>
   );
 }
