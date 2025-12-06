@@ -6,6 +6,7 @@ export default function Experience() {
   const [selectedExp, setSelectedExp] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const cardYOffset = 140;
 
   useEffect(() => {
     const checkMobile = () => {
@@ -22,37 +23,27 @@ export default function Experience() {
       title: "Incoming SWE Intern",
       company: "IBM",
       location: "Yorktown Heights, NY",
-      description: "Working with the IBM Research team on AI integration, site reliability, automation, and scripting.",
-      details: [
-        "Collaborating with research scientists on cutting-edge AI projects",
-        "Building automation tools to improve system reliability",
-        "Working with cloud infrastructure and deployment pipelines"
-      ]
+      description: "Working with IBM Research on AI integration, site reliability, and automation.",
+      details: []
     },
     {
       year: "Aug 2025 - Present",
-      title: "Software Engineer",
+      title: "Software Engineer/ML Research Assistant",
       company: "MARCI Lab",
       location: "Remote",
-      description: "",
-      details: [
-        "Built Next.js frontend with TypeScript for ML application interface",
-        "Developed Python FastAPI backend for model training and inference",
-        "Implemented Azure cloud services for data ingestion and processing",
-        "Containerized services using Docker and orchestrated with Kubernetes"
-      ]
+      description: "Building a government project with Next.js and Python on Azure, covering frontend, backend, database design, auth, and ML pipelines end-to-end.",
+      details: []
     },
     {
       year: "Mar 2025 - Aug 2025",
       title: "Software Engineer Intern",
       company: "Nexus",
       location: "Knoxville, TN",
-      description: "",
+      description: "Worked across Nexus’s core product surface, from customer-facing dashboards to the internal support backbone, so support agents and end users stayed aligned.",
       details: [
-        "Created monitoring dashboard for Virtual Machine error tracking",
-        "Fixed React Native race conditions improving app stability by 11%",
-        "Built internal support system with email protocols (41% faster response)",
-        "Automated ETL workflows reducing data integration latency by 13%"
+        "Built and iterated on internal support workflows plus customer dashboards, threading chat histories and suggested prompts to keep responses consistent and fast.",
+        "Developed and hardened ETL pipelines, adding an internal monitoring tool that flags potential data failures before they hit production.",
+        "Improved mobile stability by fixing React Native race conditions and tightening error visibility through VM health tracking."
       ]
     },
     {
@@ -60,12 +51,10 @@ export default function Experience() {
       title: "AI/ML Research Assistant",
       company: "Zhao Robot Lab",
       location: "Knoxville, TN",
-      description: "",
+      description: "Researched language understanding for patient studies by pairing GPT/Gemini analyses with search and evaluation tooling.",
       details: [
-        "Utilized GPT and Gemini to extract linguistic patterns from patient responses",
-        "Implemented FAISS vector search improving data indexing precision by 27%",
-        "Developed evaluation metrics and automated report generation",
-        "Reduced analysis turnaround time by 30% through optimization"
+        "Extracted linguistic patterns from patient responses and validated them with custom metrics and automated reporting.",
+        "Implemented FAISS-based search to boost indexing precision while optimizing pipelines to cut analysis turnaround."
       ]
     }
   ];
@@ -196,22 +185,13 @@ export default function Experience() {
                 {experiences[selectedExp].description}
               </p>
               
-              <h3 style={{ marginBottom: '0.75rem', fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#888' }}>
-                Key Responsibilities
-              </h3>
-              
-              <ul style={{ 
-                margin: 0, 
-                paddingLeft: '1.2rem',
-                fontSize: '0.95rem',
-                lineHeight: '1.6',
-                marginBottom: '2rem',
-                color: '#333'
-              }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
                 {experiences[selectedExp].details.map((detail, i) => (
-                  <li key={i} style={{ marginBottom: '0.5rem' }}>{detail}</li>
+                  <p key={i} style={{ margin: 0, fontSize: '0.95rem', lineHeight: '1.6', color: '#333' }}>
+                    {detail}
+                  </p>
                 ))}
-              </ul>
+              </div>
               
               <button
                 onClick={() => setSelectedExp(null)}
@@ -240,10 +220,7 @@ export default function Experience() {
   
   return (
     <>
-      <div className="timeline-wrapper" style={{ padding: '4rem 0', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
-        <h1 className="timeline-title" style={{ marginBottom: '0.5rem', fontSize: '2.5rem', textAlign: 'center' }}>Experience</h1>
-        <p style={{ marginBottom: '4rem', fontSize: '1rem', textAlign: 'center', color: '#666' }}>(Click a card for more info)</p>
-        
+      <div className="timeline-wrapper" style={{ padding: '2rem 0 4rem', minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
         <div className="timeline-container" style={{ position: 'relative', width: '100%', maxWidth: '1600px', margin: '0 auto', padding: '0 2rem' }}>
           <div className="timeline-line" style={{
             position: 'absolute',
@@ -299,9 +276,9 @@ export default function Experience() {
                     top: '50%',
                     left: '50%',
                     width: '1px',
-                    height: '60px',
+                    height: `${cardYOffset}px`,
                     backgroundColor: '#e5e5e5',
-                    transform: `translate(-50%, ${isTop ? '-100%' : '0'})`,
+                    transform: `translate(-50%, ${isTop ? `-${cardYOffset}px` : '0'})`,
                     zIndex: 0
                   }} />
 
@@ -312,10 +289,9 @@ export default function Experience() {
                     className="timeline-card"
                     style={{
                       position: 'absolute',
-                      top: isTop ? '0' : 'auto',
-                      bottom: isTop ? 'auto' : '0',
+                      top: '50%',
                       left: '50%',
-                      transform: `translateX(-50%) translateY(${isTop ? '-30px' : '30px'})`,
+                      transform: `translate(-50%, ${isTop ? `calc(-50% - ${cardYOffset}px)` : `calc(-50% + ${cardYOffset}px)`})`,
                       width: '100%',
                       maxWidth: '280px',
                       padding: '1.5rem',
@@ -437,22 +413,13 @@ export default function Experience() {
               {experiences[selectedExp].description}
             </p>
             
-            <h3 style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#888' }}>
-              Key Responsibilities
-            </h3>
-            
-            <ul style={{ 
-              margin: 0, 
-              paddingLeft: '1.2rem',
-              fontSize: '1.05rem',
-              lineHeight: '1.8',
-              marginBottom: '2.5rem',
-              color: '#333'
-            }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2.5rem' }}>
               {experiences[selectedExp].details.map((detail, i) => (
-                <li key={i} style={{ marginBottom: '0.75rem' }}>{detail}</li>
+                <p key={i} style={{ margin: 0, fontSize: '1.05rem', lineHeight: '1.7', color: '#333' }}>
+                  {detail}
+                </p>
               ))}
-            </ul>
+            </div>
             
             <button
               onClick={() => setSelectedExp(null)}
