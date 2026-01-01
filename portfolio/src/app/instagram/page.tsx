@@ -3,9 +3,9 @@
 export default function Instagram() {
   return (
     <div>
-      <h1 className="instagram-title">Instagram</h1>
-      <p style={{ marginBottom: '2rem', color: 'var(--muted)' }}>
-        Follow me on Instagram: <a href="https://instagram.com/al3xch7" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>@al3xch7</a>
+      <h1 className="instagram-title" style={{ textAlign: 'center' }}>Instagram</h1>
+      <p style={{ marginBottom: '2rem', color: 'var(--muted)', textAlign: 'center' }}>
+        Follow me on Instagram: <a href="https://instagram.com/al3xch7" target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', display: 'block', margin: '0 auto', textDecoration: 'underline' }}>@al3xch7</a>
       </p>
       
       <div style={{ 

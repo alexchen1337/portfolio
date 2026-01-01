@@ -1,258 +1,296 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
+
+interface Experience {
+  year: string;
+  title: string;
+  company: string;
+  location: string;
+  logo: string;
+  details: string[];
+}
 
 export default function Experience() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const experiences = [
+  const experiences: Experience[] = [
+    {
+      year: "Jun 2026",
+      title: "Incoming Software Engineering Intern",
+      company: "IBM Research",
+      location: "Yorktown Heights, NY",
+      logo: "/ibm.png",
+      details: [
+        "• No idea what I'm doing here yet haha",
+        // "•",
+        // "•"
+      ]
+    },
     {
       year: "Mar 2026",
-      title: "Incoming Software Engineer Intern",
+      title: "Incoming Software Engineering Intern",
       company: "Google",
-      location: "New York, NY"
+      location: "New York, NY",
+      logo: "/google.png",
+      details: [
+        "• Search Team",
+        // "•",
+        // "•"
+      ]
     },
     {
-      year: "Aug 2025 - Present",
+      year: "Aug 2025 — Present",
       title: "Software Engineer — AI/ML Research",
-      company: "MARCI Laboratory",
-      location: "Remote"
+      company: "Multimodal Analytics, Reasoning, and Computational Imaging",
+      location: "Remote",
+      logo: "/utk.png",
+      details: [
+        "• Led development of a government-funded (DCSA, ORNL) application, supporting decision-making for end users",
+        "• Implemented RESTful APIs and inference pipelines, achieving ∼200 ms p95 response latency in production",
+        "• Deployed and operated cloud services on AWS using Docker and Kubernetes, improving scalability and reliability,",
+      ]
     },
     {
-      year: "Mar 2025 - Aug 2025",
-      title: "Software Engineer Intern",
+      year: "Mar 2025 — Aug 2025",
+      title: "Software Engineering Intern",
       company: "Nexus",
-      location: "Knoxville, TN"
+      location: "Knoxville, TN",
+      logo: "/nexus.png",
+      details: [
+        "• Shipped core features addressing customer needs, streamlining user journeys and minimizing onboarding overhead",
+        "• Created an internal support layer with email protocols, cutting team-to-customer response times by 41%",
+        "• Built a job-queue monitoring tool to track Virtual Machine errors, boosting visibility into data integration failures",
+      ]
     },
     {
-      year: "Dec 2023 - May 2024",
+      year: "Dec 2023 — May 2024",
       title: "AI/ML Research Assistant",
       company: "Zhao Robot Laboratory",
-      location: "Knoxville, TN"
+      location: "Knoxville, TN",
+      logo: "/utk.png",
+      details: [
+        "• Leveraged LLMs (e.g. ChatGPT, Gemini) to extract linguistic patterns from responses for Alzheimer’s research",
+        "• Integrated vector search and retrieval pipelines using FAISS to improve data indexing precision by 27%",
+      ]
     }
   ];
 
-  if (isMobile) {
-    return (
-      <div style={{
-        padding: '2rem 1.5rem',
-        maxWidth: '900px',
-        margin: '0 auto'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          marginBottom: '2rem'
-        }}>
-          <h1 style={{
-            fontSize: '1.75rem',
-            fontWeight: '800',
-            letterSpacing: '-0.03em',
-            background: 'linear-gradient(135deg, #111 0%, #444 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
-            Experience
-          </h1>
-        </div>
-
-        <div style={{
-          position: 'relative',
-          paddingLeft: '2rem'
-        }}>
-          <div style={{
-            position: 'absolute',
-            left: '0.75rem',
-            top: '0',
-            bottom: '0',
-            width: '2px',
-            background: 'linear-gradient(180deg, transparent 0%, #111 10%, #111 90%, transparent 100%)',
-            borderRadius: '2px'
-          }} />
-
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              style={{
-                position: 'relative',
-                marginBottom: '2.5rem',
-                paddingBottom: '2rem',
-                borderBottom: index === experiences.length - 1 ? 'none' : '1px solid #f0f0f0'
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                left: '-1.375rem',
-                top: '0.5rem',
-                width: '14px',
-                height: '14px',
-                backgroundColor: '#111',
-                borderRadius: '50%',
-                border: '3px solid #fff',
-                boxShadow: '0 0 0 2px #111',
-                zIndex: 2
-              }} />
-
-              <div style={{
-                fontSize: '0.7rem',
-                fontWeight: '700',
-                color: '#111',
-                marginBottom: '0.4rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em'
-              }}>
-                {exp.year}
-              </div>
-
-              <h3 style={{
-                fontSize: '1rem',
-                fontWeight: '700',
-                marginBottom: '0.35rem',
-                color: '#111',
-                lineHeight: '1.2',
-                letterSpacing: '-0.02em'
-              }}>
-                {exp.title}
-              </h3>
-
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.2rem',
-                fontSize: '0.85rem',
-                color: '#555',
-                fontWeight: '500'
-              }}>
-                <span style={{ color: '#111' }}>{exp.company}</span>
-                <span style={{ color: '#666' }}>{exp.location}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   return (
     <div style={{
-      //need experience to have less gap between the top of page  and the experience
-      padding: '-5rem 2rem 2rem',
-      maxWidth: '1100px',
+      padding: '1rem 1.5rem 4rem',
+      maxWidth: '720px',
       margin: '0 auto'
     }}>
       <div style={{
-        textAlign: 'center',
-        marginBottom: '1rem'
+        marginBottom: '3rem',
+        textAlign: 'center'
       }}>
         <h1 style={{
-          fontSize: '2.25rem',
-          fontWeight: '800',
-          letterSpacing: '-0.03em',
-          background: 'linear-gradient(135deg, #111 0%, #444 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
+          fontSize: 'clamp(2rem, 5vw, 2.75rem)',
+          fontWeight: '600',
+          letterSpacing: '-0.04em',
+          color: '#1d1d1f',
+          marginBottom: '0.5rem'
         }}>
           Experience
         </h1>
+        {/* <p style={{
+          fontSize: '1.1rem',
+          color: '#86868b',
+          fontWeight: '400',
+          letterSpacing: '-0.01em'
+        }}>
+          Where I've been building.
+        </p> */}
       </div>
 
       <div style={{
-        position: 'relative'
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0'
       }}>
-        <div style={{
-          position: 'absolute',
-          left: '50%',
-          top: '0',
-          bottom: '0',
-          width: '2px',
-          background: 'linear-gradient(180deg, transparent 0%, #111 10%, #111 90%, transparent 100%)',
-          transform: 'translateX(-50%)',
-          zIndex: 0
-        }} />
-
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.25rem',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          {experiences.map((exp, index) => {
-            const isLeft = index % 2 === 0;
-            
-            return (
-              <div
-                key={index}
-                style={{
-                  display: 'flex',
-                  justifyContent: isLeft ? 'flex-start' : 'flex-end'
-                }}
-              >
+        {experiences.map((exp, index) => {
+          const isExpanded = expandedIndex === index;
+          
+          return (
+            <div
+              key={index}
+              onClick={() => toggleExpand(index)}
+              style={{
+                position: 'relative',
+                cursor: 'pointer',
+                borderTop: index === 0 ? '1px solid #d2d2d7' : 'none',
+                borderBottom: '1px solid #d2d2d7'
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1.25rem',
+                padding: '1.5rem 0',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}>
                 <div style={{
-                  width: '42%',
-                  padding: '1rem',
-                  backgroundColor: '#fff',
+                  width: '56px',
+                  height: '56px',
                   borderRadius: '12px',
-                  border: '2px solid #111',
-                  boxShadow: '3px 3px 0px #111',
-                  transition: 'all 0.3s ease'
+                  backgroundColor: '#fff',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  overflow: 'hidden',
+                  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                  e.currentTarget.style.boxShadow = '5px 5px 0px #111';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translate(0, 0)';
-                  e.currentTarget.style.boxShadow = '3px 3px 0px #111';
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)';
+                }}>
+                  <Image
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    width={40}
+                    height={40}
+                    style={{
+                      objectFit: 'contain'
+                    }}
+                  />
+                </div>
+
+                <div style={{
+                  flex: 1,
+                  minWidth: 0
                 }}>
                   <div style={{
-                    fontSize: '0.65rem',
-                    fontWeight: '700',
-                    color: '#111',
-                    marginBottom: '0.4rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em'
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    marginBottom: '0.25rem',
+                    flexWrap: 'wrap'
                   }}>
-                    {exp.year}
+                    <h3 style={{
+                      fontSize: '1.125rem',
+                      fontWeight: '600',
+                      color: '#1d1d1f',
+                      letterSpacing: '-0.02em',
+                      lineHeight: '1.3'
+                    }}>
+                      {exp.company}
+                    </h3>
+                    <span style={{
+                      fontSize: '0.875rem',
+                      color: '#86868b',
+                      fontWeight: '400',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {exp.year}
+                    </span>
                   </div>
 
-                  <h3 style={{
-                    fontSize: '1rem',
-                    fontWeight: '700',
-                    marginBottom: '0.4rem',
-                    color: '#111',
-                    lineHeight: '1.2',
-                    letterSpacing: '-0.02em'
+                  <p style={{
+                    fontSize: '0.9375rem',
+                    color: '#1d1d1f',
+                    fontWeight: '400',
+                    marginBottom: '0.125rem',
+                    letterSpacing: '-0.01em'
                   }}>
                     {exp.title}
-                  </h3>
+                  </p>
 
-                  <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.15rem',
-                    fontSize: '0.85rem',
-                    color: '#555',
-                    fontWeight: '500'
+                  <p style={{
+                    fontSize: '0.875rem',
+                    color: '#86868b',
+                    fontWeight: '400'
                   }}>
-                    <span style={{ color: '#111', fontWeight: '600' }}>{exp.company}</span>
-                    <span style={{ color: '#666', fontSize: '0.8rem' }}>{exp.location}</span>
-                  </div>
+                    {exp.location}
+                  </p>
+                </div>
+
+                <div style={{
+                  width: '24px',
+                  height: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    style={{
+                      transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                  >
+                    <path
+                      d="M2.5 4.5L6 8L9.5 4.5"
+                      stroke="#86868b"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
               </div>
-            );
-          })}
-        </div>
+
+              <div style={{
+                overflow: 'hidden',
+                maxHeight: isExpanded ? '300px' : '0',
+                opacity: isExpanded ? 1 : 0,
+                transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease'
+              }}>
+                <div style={{
+                  paddingBottom: '1.5rem',
+                  paddingLeft: 'calc(56px + 1.25rem)'
+                }}>
+                  <ul style={{
+                    listStyle: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.625rem'
+                  }}>
+                    {exp.details.map((detail, detailIndex) => (
+                      <li
+                        key={detailIndex}
+                        style={{
+                          fontSize: '0.9375rem',
+                          color: '#1d1d1f',
+                          lineHeight: '1.5',
+                          paddingLeft: '1rem',
+                          position: 'relative'
+                        }}
+                      >
+                        <span style={{
+                          position: 'absolute',
+                          left: 0,
+                          color: '#86868b'
+                        }}>
+                          {detail.startsWith('•') ? '•' : ''}
+                        </span>
+                        {detail.startsWith('•') ? detail.slice(1).trim() || '\u00A0' : detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

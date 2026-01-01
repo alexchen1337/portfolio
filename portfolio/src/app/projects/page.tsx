@@ -7,6 +7,11 @@ export default function Projects() {
       link: "https://floatdemo.vercel.app/"
     },
     {
+      title: "League of Legends Graph Database",
+      description: "NoSQL Graph Database for League of Legends player relationships and match analytics.",
+      link: "https://github.com/alexchen1337/league-of-legends-graphdb"
+    },
+    {
       title: "Reinforcement Learning in Terraria",
       description: "Applying reinforcement learning algorithms to train agents in the Terraria game environment.",
       link: "https://www.linkedin.com/feed/update/urn:li:activity:7394860085287530496/"
@@ -40,7 +45,7 @@ export default function Projects() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: '2.5rem', fontSize: '2.5rem', fontWeight: '600' }}>Projects</h1>
+      <h1 style={{ marginBottom: '2.5rem', fontSize: '2.5rem', fontWeight: '600', textAlign: 'center' }}>Projects</h1>
       
       <div style={{
         display: 'grid',
