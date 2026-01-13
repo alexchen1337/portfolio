@@ -12,11 +12,6 @@ export default function Projects() {
       link: "https://github.com/alexchen1337/league-of-legends-graphdb"
     },
     {
-      title: "Reinforcement Learning in Terraria",
-      description: "Applying reinforcement learning algorithms to train agents in the Terraria game environment.",
-      link: "https://www.linkedin.com/feed/update/urn:li:activity:7394860085287530496/"
-    },
-    {
       title: "SpeakGeek - Google AI Hackathon",
       description: "Behavioral interview feedback platform using Google Gemini. Built with React, Firebase, and TailwindCSS.",
       link: "https://6610ac02dfac427cb4cf4d6b--serene-douhua-d88e0e.netlify.app/"

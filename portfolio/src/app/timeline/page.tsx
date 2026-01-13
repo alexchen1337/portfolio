@@ -17,20 +17,8 @@ export default function Experience() {
 
   const experiences: Experience[] = [
     {
-      year: "Jun 2026",
-      title: "Incoming Software Engineering Intern",
-      company: "IBM Research",
-      location: "Yorktown Heights, NY",
-      logo: "/ibm.png",
-      details: [
-        "• No idea what I'm doing here yet haha",
-        // "•",
-        // "•"
-      ]
-    },
-    {
       year: "Mar 2026",
-      title: "Incoming Software Engineering Intern",
+      title: "Incoming Software Engineering Intern — Google Search Team",
       company: "Google",
       location: "New York, NY",
       logo: "/google.png",
@@ -41,15 +29,15 @@ export default function Experience() {
       ]
     },
     {
-      year: "Aug 2025 — Present",
-      title: "Software Engineer — AI/ML Research",
+      year: "Nov 2025 — Present",
+      title: "Research Software Engineer",
       company: "Multimodal Analytics, Reasoning, and Computational Imaging",
       location: "Remote",
       logo: "/utk.png",
       details: [
-        "• Led development of a government-funded (DCSA, ORNL) application, supporting decision-making for end users",
+        "• Led the development of an analytics platform for the Defense Counterintelligence and Security Agency, supporting real-time decision-making for 350+ federal users",
         "• Implemented RESTful APIs and inference pipelines, achieving ∼200 ms p95 response latency in production",
-        "• Deployed and operated cloud services on AWS using Docker and Kubernetes, improving scalability and reliability,",
+        "• Orchestrated cloud-native deployments on AWS using Kubernetes and Docker, achieving 99.9% uptime and automated horizontal scaling",
       ]
     },
     {
@@ -59,9 +47,9 @@ export default function Experience() {
       location: "Knoxville, TN",
       logo: "/nexus.png",
       details: [
-        "• Shipped core features addressing customer needs, streamlining user journeys and minimizing onboarding overhead",
-        "• Created an internal support layer with email protocols, cutting team-to-customer response times by 41%",
-        "• Built a job-queue monitoring tool to track Virtual Machine errors, boosting visibility into data integration failures",
+        "• Shipped full-stack product features addressing customer needs, streamlining user journeys and onboarding",
+        "• Built a VM monitoring tool to detect data ingestion failures, cutting identification time from 30+ min to <10 sec",
+        "• Automated customer support tickets by developing a custom email protocol layer, improving team-to-customer response times by 41%",
       ]
     },
     {
