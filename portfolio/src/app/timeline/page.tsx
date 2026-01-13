@@ -35,7 +35,7 @@ export default function Experience() {
       location: "Remote",
       logo: "/utk.png",
       details: [
-        "• Led the development of an analytics platform for the Defense Counterintelligence and Security Agency, supporting real-time decision-making for 350+ federal users",
+        "• Led the development of an analytics platform for the Defense Counterintelligence and Security Agency, supporting real-time decision-making for federal users",
         "• Implemented RESTful APIs and inference pipelines, achieving ∼200 ms p95 response latency in production",
         "• Orchestrated cloud-native deployments on AWS using Kubernetes and Docker, achieving 99.9% uptime and automated horizontal scaling",
       ]
