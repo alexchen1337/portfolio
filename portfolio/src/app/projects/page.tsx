@@ -3,37 +3,47 @@ export default function Projects() {
   const projects = [
     {
       title: "Float.AI - Valorant AI Coach",
-      description: "AI-powered coaching system using policy-gradient models trained on 200+ professional matches. Built with React, FastAPI, Overwolf, Azure, and PyTorch.",
+      description: "AI-powered coaching system using policy-gradient models trained on 200+ professional matches. Built with React, FastAPI, MSSQL, AWS, and PyTorch.",
       link: "https://floatdemo.vercel.app/"
     },
     {
-      title: "League of Legends Graph Database",
-      description: "NoSQL Graph Database for League of Legends player relationships and match analytics.",
-      link: "https://github.com/alexchen1337/league-of-legends-graphdb"
+      title: "SpeakWell",
+      description: "Grade Presentations using AI, built with NextJS, FastAPI, PostgreSQL, and Supabase.",
+      link: "https://github.com/alexchen1337/SpeakWell"
     },
     {
-      title: "SpeakGeek - Google AI Hackathon",
-      description: "Behavioral interview feedback platform using Google Gemini. Built with React, Firebase, and TailwindCSS.",
+      title: "AI Summary Footer",
+      description: "Package for adding LLM-powered summaries to your website's footer (100+ installs as of 2026-01-19).",
+      link: "https://www.npmjs.com/package/ai-summary-footer"
+    },
+    {
+      title: "SpeakGeek - Hackathon Submission",
+      description: "Behavioral interview feedback platform using OpenAI API. Built with React, Firebase, and TailwindCSS.",
       link: "https://6610ac02dfac427cb4cf4d6b--serene-douhua-d88e0e.netlify.app/"
     },
     {
+      title: "League of Legends Graph Database",
+      description: "NoSQL Graph Database for League of Legends player relationships and match analytics built with C++.",
+      link: "https://github.com/alexchen1337/league-of-legends-graphdb"
+    },
+    {
       title: "Video Compression Tool",
-      description: "C++ tool to compress files into smaller chunks for Discord upload and reconstruction.",
+      description: "Tool to compress files into smaller chunks for Discord upload and reconstruction built with C++.",
       link: "https://github.com/alexchen1337/video-compression-tool"
     },
     {
       title: "Smart Ride",
-      description: "Machine learning analysis on Uber dataset to predict ride patterns and optimize routes.",
+      description: "Machine learning analysis on Uber dataset to predict ride patterns and optimize routes built with PyTorch.",
       link: "https://github.com/ericcht/Smart-Ride"
     },
     {
       title: "Multithreaded Socket Chat Server",
-      description: "High-performance chat server implementation using multithreading and socket programming.",
+      description: "Chat server implementation using multithreading and socket programming built with C.",
       link: "https://github.com/alexchen1337/multithreaded-socket-chat-server"
     },
     {
       title: "9to5 - Python Game",
-      description: "Interactive Python-based game exploring work-life balance themes.",
+      description: "Interactive game exploring work-life balance themes built with Python and Pygame.",
       link: "https://github.com/alexchen1337/9to5"
     }
   ];
