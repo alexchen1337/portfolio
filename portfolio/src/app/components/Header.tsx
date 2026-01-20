@@ -75,7 +75,7 @@ export default function Header() {
         <nav className="nav">
           <Link href="/timeline" className="nav-link">Experience</Link>
           <Link href="/projects" className="nav-link">Projects</Link>
-          <Link href="/instagram" className="nav-link">Instagram</Link>
+          <Link href="/writings" className="nav-link">Writings</Link>
         </nav>
       </header>
 
