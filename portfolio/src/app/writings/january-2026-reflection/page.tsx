@@ -1,5 +1,7 @@
 'use client';
 
+import Image from "next/image";
+
 export default function January2026Reflection() {
   return (
     <article style={{
@@ -12,7 +14,7 @@ export default function January2026Reflection() {
       <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem' }}>January 2026 Reflection</h1>
 
       <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', fontWeight: 'bold' }}>January 2026 in Review</h2>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', fontWeight: 'bold' }}>First Month of 2026!</h2>
         <p style={{ marginBottom: '1rem' }}>
           My January has been pretty thrilling.
         </p>
@@ -56,8 +58,23 @@ export default function January2026Reflection() {
       <div style={{ marginBottom: '2rem' }}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', fontWeight: 'bold' }}>Miscellaneous</h2>
         <p style={{ marginBottom: '1rem' }}>
-          I've been playing so much Minecraft. I'm lowkey addicted again.
+          I've been playing so much Minecraft. I'm lowkey addicted again. Here's a picture of one of the builds :P
         </p>
+      </div>
+
+      <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+        <Image
+          src="/writings/january-2026-reflection/image1.jpg"
+          alt=""
+          width={700}
+          height={500}
+          style={{
+            maxWidth: '700px',
+            width: '100%',
+            height: 'auto',
+            borderRadius: '8px'
+          }}
+        />
       </div>
     </article>
   );
