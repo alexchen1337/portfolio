@@ -17,8 +17,18 @@ export default function Experience() {
 
   const experiences: Experience[] = [
     {
+      year: "Jun 2026",
+      title: "Incoming Software Engineering Intern",
+      company: "Startup (Stealth Mode)",
+      location: "New York, NY",
+      logo: "/startup-icon.png",
+      details: [
+        "• Details coming soon",
+      ]
+    },
+    {
       year: "Mar 2026",
-      title: "Incoming Software Engineering Intern — Google Search Team",
+      title: "Incoming Software Engineering Intern",
       company: "Google",
       location: "New York, NY",
       logo: "/google.png",
@@ -31,13 +41,13 @@ export default function Experience() {
     {
       year: "Nov 2025 — Present",
       title: "Research Software Engineer",
-      company: "Multimodal Analytics, Reasoning, and Computational Imaging",
+      company: "MARCI Laboratory",
       location: "Remote",
       logo: "/utk.png",
       details: [
-        "• Led the development of an analytics platform for the Defense Counterintelligence and Security Agency, supporting real-time decision-making for federal users",
-        "• Implemented RESTful APIs and inference pipelines, achieving ∼200 ms p95 response latency in production",
-        "• Orchestrated cloud-native deployments on AWS using Kubernetes and Docker, achieving 99.9% uptime and automated horizontal scaling",
+        "• Led development of a Next.js/FastAPI analytics platform for the DCSA, supporting federal users",
+        "• Deployed inference pipelines via REST, achieving 200ms p95 latency with request batching and model caching",
+        "• Orchestrated AWS EKS deployments via Kubernetes/Docker, achieving 99.9% uptime and horizontal scaling",
       ]
     },
     {
@@ -47,9 +57,9 @@ export default function Experience() {
       location: "Knoxville, TN",
       logo: "/nexus.png",
       details: [
-        "• Shipped full-stack product features addressing customer needs, streamlining user journeys and onboarding",
-        "• Built a VM monitoring tool to detect data ingestion failures, cutting identification time from 30+ min to <10 sec",
-        "• Automated customer support tickets by developing a custom email protocol layer, improving team-to-customer response times by 41%",
+        "• Optimized high-traffic dashboard load times via Redis caching, reducing latency by 34% and offloading 50% of redundant queries from the PostgreSQL primary instance",
+        "• Built observability tool to detect data ingestion failures, cutting identification time from 30+ min to under 10 sec",
+        "• Developed an internal tool with React/FastAPI that auto-assigned support tickets with relevant user context, reducing mean-time-to-respond (MTTR) by 41%",
       ]
     },
     {

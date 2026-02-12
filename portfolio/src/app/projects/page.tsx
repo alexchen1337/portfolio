@@ -2,6 +2,11 @@
 export default function Projects() {
   const projects = [
     {
+      title: "Valorant Tracker TUI",
+      description: "Terminal user interface for Valorant match tracking with fatigue detection and optimal playtime analysis. Identifies performance patterns based on time of day.",
+      link: "https://github.com/alexchen1337/valorant-tracker-tui"
+    },
+    {
       title: "Float.AI - Valorant AI Coach",
       description: "AI-powered coaching system using policy-gradient models trained on 200+ professional matches. Built with React, FastAPI, MSSQL, AWS, and PyTorch.",
       link: "https://floatdemo.vercel.app/"
