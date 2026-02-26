@@ -12,7 +12,9 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -133,4 +135,30 @@ p {
   margin-left: calc(-50vw + 50%);
   padding-left: calc(50vw - 50%);
   padding-right: calc(50vw - 50%);
+}
+
+::selection {
+  background: #e5e5e5;
+  color: #111;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.stagger-1 { animation: fadeIn 0.8s ease-out 0.1s both; }
+.stagger-2 { animation: fadeIn 0.8s ease-out 0.2s both; }
+.stagger-3 { animation: fadeIn 0.8s ease-out 0.3s both; }
+.stagger-4 { animation: fadeIn 0.8s ease-out 0.4s both; }
+.stagger-5 { animation: fadeIn 0.8s ease-out 0.5s both; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
