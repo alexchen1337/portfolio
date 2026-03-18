@@ -72,7 +72,7 @@ export default function Home() {
               onMouseLeave={(e) => e.currentTarget.style.opacity = '0.75'}
             >
               <Image src="/utk.png" alt="UTK" width={14} height={14} style={{ objectFit: 'contain', borderRadius: '3px' }} />
-              cs @ UTK
+              cs @ utk
             </a>
             <span style={{ color: '#ddd', fontSize: '0.75rem' }}>·</span>
             <a href="https://google.com" target="_blank" rel="noopener noreferrer"
@@ -81,7 +81,7 @@ export default function Home() {
               onMouseLeave={(e) => e.currentTarget.style.opacity = '0.75'}
             >
               <Image src="/google.png" alt="Google" width={14} height={14} style={{ objectFit: 'contain', borderRadius: '3px' }} />
-              eng @ Google
+              eng @ google
             </a>
             <span style={{ color: '#ddd', fontSize: '0.75rem' }}>·</span>
             <span style={{ color: '#999', fontSize: '0.8rem' }}>incoming eng @ ___</span>
@@ -98,7 +98,7 @@ export default function Home() {
               onMouseLeave={(e) => e.currentTarget.style.opacity = '0.75'}
             >
               <Image src="/marci.png" alt="MARCI Lab" width={14} height={14} style={{ objectFit: 'contain', borderRadius: '3px' }} />
-              eng @ MARCI Lab
+              eng @ marci lab
             </a>
             <span style={{ color: '#ddd', fontSize: '0.75rem' }}>·</span>
             <a href="https://www.asknexus.ai" target="_blank" rel="noopener noreferrer"
@@ -107,7 +107,7 @@ export default function Home() {
               onMouseLeave={(e) => e.currentTarget.style.opacity = '0.75'}
             >
               <Image src="/nexus.png" alt="Nexus" width={14} height={14} style={{ objectFit: 'contain', borderRadius: '3px' }} />
-              eng @ Nexus
+              eng @ nexus
             </a>
           </div>
 
