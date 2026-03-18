@@ -7,11 +7,6 @@ export default function Projects() {
       link: "https://github.com/alexchen1337/valorant-tracker-tui"
     },
     {
-      title: "Float.AI - Valorant AI Coach",
-      description: "AI-powered coaching system using policy-gradient models trained on 200+ professional matches. Built with React, FastAPI, MSSQL, AWS, and PyTorch.",
-      link: "https://floatdemo.vercel.app/"
-    },
-    {
       title: "SpeakWell",
       description: "Grade Presentations using AI, built with NextJS, FastAPI, PostgreSQL, and Supabase.",
       link: "https://github.com/alexchen1337/SpeakWell"
@@ -20,21 +15,6 @@ export default function Projects() {
       title: "AI Summary Footer",
       description: "Package for adding LLM-powered summaries to your website's footer (100+ installs as of 2026-01-19).",
       link: "https://www.npmjs.com/package/ai-summary-footer"
-    },
-    {
-      title: "SpeakGeek - Hackathon Submission",
-      description: "Behavioral interview feedback platform using OpenAI API. Built with React, Firebase, and TailwindCSS.",
-      link: "https://6610ac02dfac427cb4cf4d6b--serene-douhua-d88e0e.netlify.app/"
-    },
-    {
-      title: "League of Legends Graph Database",
-      description: "NoSQL Graph Database for League of Legends player relationships and match analytics built with C++.",
-      link: "https://github.com/alexchen1337/league-of-legends-graphdb"
-    },
-    {
-      title: "Video Compression Tool",
-      description: "Tool to compress files into smaller chunks for Discord upload and reconstruction built with C++.",
-      link: "https://github.com/alexchen1337/video-compression-tool"
     },
     {
       title: "Smart Ride",
