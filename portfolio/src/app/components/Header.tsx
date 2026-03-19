@@ -74,6 +74,7 @@ export default function Header() {
         </div>
         <nav className="nav">
           <Link href="/projects" className="nav-link">Projects</Link>
+          <Link href="/writings" className="nav-link">Writings</Link>
           <Link href="/valorant" className="nav-link">Valorant</Link>
         </nav>
       </header>

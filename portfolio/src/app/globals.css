@@ -162,3 +162,60 @@ p {
     transform: translateY(0);
   }
 }
+
+/* Writings markdown content */
+.writings-markdown h1 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.writings-markdown h2 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.writings-markdown h3 {
+  font-size: 1.1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.writings-markdown p {
+  margin-bottom: 1rem;
+}
+.writings-markdown ul,
+.writings-markdown ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+.writings-markdown li {
+  margin-bottom: 0.35rem;
+}
+.writings-markdown a {
+  color: var(--foreground);
+  text-decoration: underline;
+}
+.writings-markdown a:hover {
+  opacity: 0.8;
+}
+.writings-markdown code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  background-color: #eee;
+  border-radius: 4px;
+}
+.writings-markdown pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.writings-markdown pre code {
+  padding: 0;
+  background: none;
+}
+.writings-back-link:hover {
+  color: var(--foreground);
+  text-decoration: none;
+}
