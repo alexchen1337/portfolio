@@ -48,8 +48,8 @@ export function getAllWritings(): WritingMeta[] {
     writings.push({ slug, title, date });
   }
 
-  // Sort by date ascending (oldest first, newest at bottom)
-  writings.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  // Sort by date descending (newest first)
+  writings.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return writings;
 }
