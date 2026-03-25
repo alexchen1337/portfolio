@@ -1,4 +1,7 @@
-# video games made my career (kind of)
+---
+title: "video games made my career (kind of)"
+date: 2026-03-25
+---
 
 I talked a little in my last post about how I competed in Fortnite and Valorant. Top 500 power rankings in Fortnite, briefly top 70 Radiant in Valorant. I don't bring this up to flex (jk I definitely am), but because I genuinely think it's one of the most underrated reasons I'm where I am right now. Obviously I could be doing better, and I still need a full-time position, but that's for future me to worry about.
 

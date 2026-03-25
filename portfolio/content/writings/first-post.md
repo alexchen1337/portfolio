@@ -1,4 +1,7 @@
-# before we start, i'm really bad at writing (sorry)
+---
+title: "before we start, i'm really bad at writing (sorry)"
+date: 2026-03-14
+---
 
 I decided it's time to reflect on my career publicly because I think it helps others while also benefitting myself as I want to track my progression or just ramble for fun.
 
