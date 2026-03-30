@@ -2,10 +2,13 @@
 
 export default function Instagram() {
   return (
-    <div>
+    <div className="copy-body">
       <h1 className="instagram-title" style={{ textAlign: 'center' }}>Instagram</h1>
       <p style={{ marginBottom: '2rem', color: 'var(--muted)', textAlign: 'center' }}>
-        Follow me on Instagram: <a href="https://instagram.com/al3xch7" target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', display: 'block', margin: '0 auto', textDecoration: 'underline' }}>@al3xch7</a>
+        Follow me on Instagram:{' '}
+        <a href="https://instagram.com/al3xch7" target="_blank" rel="noopener noreferrer" className="pill-link" style={{ display: 'inline-flex' }}>
+          @al3xch7
+        </a>
       </p>
       
       <div style={{ 
@@ -30,18 +33,12 @@ export default function Instagram() {
       </div>
       
       <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-        <a 
-          href="https://instagram.com/al3xch7" 
-          target="_blank" 
+        <a
+          href="https://instagram.com/al3xch7"
+          target="_blank"
           rel="noopener noreferrer"
-          style={{ 
-            display: 'inline-block',
-            padding: '0.75rem 1.5rem',
-            border: '1px solid var(--foreground)',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            transition: 'all 0.2s'
-          }}
+          className="pill-link"
+          style={{ padding: '0.65rem 1.25rem' }}
         >
           View on Instagram
         </a>

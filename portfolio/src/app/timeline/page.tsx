@@ -18,7 +18,7 @@ export default function Experience() {
       title: "Incoming Software Engineering Intern",
       company: "Startup (Stealth Mode)",
       location: "New York, NY",
-      logo: "/startup-icon.png"
+      logo: "/globe.svg"
     },
     {
       year: "Mar 2026",
@@ -32,7 +32,7 @@ export default function Experience() {
       title: "Research Software Engineer",
       company: "MARCI Laboratory",
       location: "Remote",
-      logo: "/utk.png"
+      logo: "/marci.png"
     },
     {
       year: "Mar 2025 — Aug 2025",
@@ -40,13 +40,6 @@ export default function Experience() {
       company: "Nexus",
       location: "Knoxville, TN",
       logo: "/nexus.png"
-    },
-    {
-      year: "Dec 2023 — May 2024",
-      title: "AI/ML Research Assistant",
-      company: "Zhao Robot Laboratory",
-      location: "Knoxville, TN",
-      logo: "/utk.png"
     }
   ];
 

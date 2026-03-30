@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { getWritingBySlug, getAllWritings } from "@/lib/writings";
@@ -21,34 +20,15 @@ export default async function WritingPage({ params }: Props) {
   }
 
   return (
-    <article>
-      <Link
-        href="/writings"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.35rem",
-          marginBottom: "2rem",
-          color: "var(--muted)",
-          fontSize: "0.9rem",
-          textDecoration: "none",
-        }}
-        className="writings-back-link"
-      >
-        ← Back to writings
-      </Link>
-
-      <header style={{ marginBottom: "2rem" }}>
-        <h1 style={{ marginBottom: "0.5rem", fontSize: "2.25rem", fontWeight: "600" }}>{writing.title}</h1>
-        <time
-          style={{ fontSize: "0.9rem", color: "var(--muted)" }}
-          dateTime={writing.date}
-        >
+    <article className="writings-article">
+      <header className="writings-article__header">
+        <h1 className="writings-article__title">{writing.title}</h1>
+        <time className="writings-article__date" dateTime={writing.date}>
           {new Date(writing.date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
-          })}
+          }).toLowerCase()}
         </time>
       </header>
 

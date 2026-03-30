@@ -1,23 +1,19 @@
 'use client';
-import { useState } from 'react';
 
 export default function Valorant() {
-  const [hovering, setHovering] = useState(false);
   return (
-    <div style={{ maxWidth: '720px', margin: '-2rem auto 0', padding: '0 1.5rem 1rem' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: '600', letterSpacing: '-0.03em', marginBottom: '0.5rem' }}>
-          Valorant
-        </h1>
-        <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+    <div className="copy-body" style={{ maxWidth: '720px', margin: '-1rem auto 0', padding: '0 0 1rem' }}>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <span className="section-label">// valorant</span>
+        <p style={{ color: '#fff', lineHeight: '1.6', marginTop: '8px', marginBottom: 0 }}>
           3x radiant, used to compete semi-professionally—retired now but check out my clips
         </p>
       </div>
 
       <div style={{
-        borderRadius: '16px',
+        borderRadius: '12px',
         overflow: 'hidden',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+        border: '1px solid var(--border)',
         aspectRatio: '16/9',
         width: '100%',
       }}>
@@ -29,26 +25,16 @@ export default function Valorant() {
         />
       </div>
 
-      <div style={{ marginTop: '1.25rem', display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
         <a
           href="https://www.youtube.com/@ChiuceVAL/videos"
           target="_blank"
           rel="noopener noreferrer"
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          style={{
-            fontSize: '0.85rem',
-            textDecoration: 'none',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            color: '#111',
-            opacity: hovering ? 0.5 : 1,
-            transition: 'opacity 0.2s',
-          }}
+          className="pill-link"
+          style={{ fontSize: '12px' }}
         >
           view all on youtube
-          <span style={{ transition: 'transform 0.2s', transform: hovering ? 'translateX(3px)' : 'translateX(0)' }}>→</span>
+          <span className="pill-link-arrow">{'->'}</span>
         </a>
       </div>
     </div>

@@ -6,7 +6,6 @@ export default function Projects() {
     { title: "AI Summary Footer", link: "https://www.npmjs.com/package/ai-summary-footer" },
     { title: "Smart Ride", link: "https://github.com/ericcht/Smart-Ride" },
     { title: "Socket Chat Server", link: "https://github.com/alexchen1337/multithreaded-socket-chat-server" },
-    { title: "9to5 Simulator", link: "https://github.com/alexchen1337/9to5" }
   ];
 
   return (
@@ -19,10 +18,13 @@ export default function Projects() {
         gap: '1.5rem'
       }}>
         {projects.map((project, index) => (
-          <div 
-            key={index} 
-            className="project-card"
-            style={{ 
+          <a
+            key={index}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-card-link"
+            style={{
               padding: '2rem',
               backgroundColor: '#fff',
               border: '1px solid #eaeaea',
@@ -30,36 +32,20 @@ export default function Projects() {
               display: 'flex',
               flexDirection: 'column',
               transition: 'all 0.3s ease',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+              textDecoration: 'none',
+              color: 'inherit',
             }}
           >
-            <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', fontWeight: '600', lineHeight: '1.3' }}>
+            <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '600', lineHeight: '1.3', color: '#1d1d1f' }}>
               {project.title}
             </h3>
-            <div>
-              <a 
-                href={project.link} 
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ 
-                  fontSize: '0.9rem', 
-                  fontWeight: '500', 
-                  textDecoration: 'none', 
-                  display: 'inline-flex', 
-                  alignItems: 'center', 
-                  gap: '0.5rem',
-                  color: 'var(--foreground)'
-                }}
-              >
-                View Project <span>→</span>
-              </a>
-            </div>
-          </div>
+          </a>
         ))}
       </div>
       
       <style jsx>{`
-        .project-card:hover {
+        .project-card-link:hover {
           transform: translateY(-4px);
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
           border-color: #ddd;
@@ -71,7 +57,7 @@ export default function Projects() {
             margin-bottom: 2rem !important;
           }
           
-          .project-card {
+          .project-card-link {
             padding: 1.5rem !important;
           }
         }
