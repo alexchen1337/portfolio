@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "alex chen | cs @ utk",
+  title: "alex chen",
   description: "personal portfolio",
 };
 

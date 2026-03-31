@@ -141,7 +141,7 @@ export default function HomeClient() {
         <div className="home-section__under-label valorant-home-inner">
           <span>me rambling</span>
           <span className="valorant-home-sep" aria-hidden>|</span>
-          <Link href="/writings" className="pill-link">
+          <Link href="/writings" className="pill-link pill-link--underline">
             {'read here ->'}
           </Link>
         </div>
@@ -157,7 +157,7 @@ export default function HomeClient() {
             href="https://www.youtube.com/@ChiuceVAL/videos"
             target="_blank"
             rel="noopener noreferrer"
-            className="pill-link"
+            className="pill-link pill-link--underline"
           >
             {'watch clips ->'}
           </a>

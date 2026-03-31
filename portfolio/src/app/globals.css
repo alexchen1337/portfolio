@@ -1,13 +1,13 @@
 :root {
-  --background: #0D1117;
-  --foreground: #c9d1d9;
-  --muted: #8b949e;
-  --accent: #58a6ff;
-  --green: #3fb950;
-  --border: #21262d;
-  --dim: #484f58;
-  /* Hover text on dark UI: lighter gray (not accent blue) */
-  --hover-fg: #e6edf3;
+  --background: #FAF7F0;
+  --foreground: #333333;
+  --muted: #666666;
+  --accent: #333333;
+  --green: #2f7d32;
+  --border: rgba(0, 0, 0, 0.10);
+  --dim: rgba(0, 0, 0, 0.45);
+  /* Hover text on light UI */
+  --hover-fg: #111111;
   /* One size for // labels, rows, meta, pills (home + copy-body pages) */
   --home-copy-size: 13px;
   --affiliation-line-height: 1.25;
@@ -29,6 +29,8 @@ body {
 body {
   color: var(--foreground);
   background-color: var(--background);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -77,7 +79,7 @@ a:hover {
 
 .main-content {
   min-height: 60vh;
-  animation: pageLoad 0.4s ease-out;
+  animation: none;
 }
 
 /* No route transition on /writings — reading stays static */
@@ -86,24 +88,14 @@ a:hover {
 }
 
 @keyframes pageLoad {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 1; transform: none; }
+  to { opacity: 1; transform: none; }
 }
 
 /* Route template (App Router) — opacity-only, matches template.tsx */
 @keyframes routeTransition {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 1; }
+  to { opacity: 1; }
 }
 
 h1, h2, h3 {
@@ -132,37 +124,31 @@ p {
 }
 
 ::selection {
-  background: #264f78;
-  color: #fff;
+  background: rgba(0, 0, 0, 0.14);
+  color: #111111;
 }
 
 .font-mono {
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
 
-.stagger-1 { animation: fadeIn 0.6s ease-out 0.05s both; }
-.stagger-2 { animation: fadeIn 0.6s ease-out 0.1s both; }
-.stagger-3 { animation: fadeIn 0.6s ease-out 0.15s both; }
-.stagger-4 { animation: fadeIn 0.6s ease-out 0.2s both; }
-.stagger-5 { animation: fadeIn 0.6s ease-out 0.25s both; }
-.stagger-6 { animation: fadeIn 0.6s ease-out 0.3s both; }
-.stagger-7 { animation: fadeIn 0.6s ease-out 0.35s both; }
+.stagger-1 { animation: none; }
+.stagger-2 { animation: none; }
+.stagger-3 { animation: none; }
+.stagger-4 { animation: none; }
+.stagger-5 { animation: none; }
+.stagger-6 { animation: none; }
+.stagger-7 { animation: none; }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 1; transform: none; }
+  to { opacity: 1; transform: none; }
 }
 
 /* /writings — reading typography (layout wraps with .writings-reading-root) */
 .writings-reading-root {
-  --writings-heading: #f0f6fc;
-  --writings-body: #c1cad4;
+  --writings-heading: #000;
+  --writings-body: #000;
   font-family: var(--font-reading), "Songti SC", "STSong", "Noto Serif SC", Georgia, "Times New Roman", serif;
   letter-spacing: 0.01em;
   line-height: 2;
@@ -173,7 +159,7 @@ p {
 
 .writings-reading-root .section-label {
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 900;
   letter-spacing: 0.06em;
   text-transform: lowercase;
 }
@@ -295,8 +281,8 @@ p {
   transition: color 0.15s ease, background 0.15s ease;
 }
 .writings-markdown a:hover {
-  background: rgba(88, 166, 255, 0.12);
-  color: #79b8ff;
+  background: rgba(0, 0, 0, 0.06);
+  color: #111111;
 }
 .writings-markdown code {
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
@@ -349,9 +335,9 @@ p {
 /* // section labels + list body (same rhythm as home) */
 .section-label {
   font-size: var(--home-copy-size);
-  font-weight: var(--section-label-weight);
+  font-weight: 900;
   letter-spacing: var(--section-label-tracking);
-  color: var(--green);
+  color: var(--muted);
 }
 .copy-body {
   font-size: var(--home-copy-size);
@@ -400,6 +386,9 @@ p {
   justify-content: space-between;
   gap: 14px;
   padding-bottom: 20px;
+  /* Match row content inset so the avatar lines up with dates / right column */
+  padding-right: var(--home-row-pad-x);
+  box-sizing: border-box;
 }
 
 .home-page__top-left {
@@ -438,8 +427,11 @@ p {
 
 .home-page__avatar {
   display: block;
+  width: 48px;
+  height: 48px;
   border-radius: 0;
   object-fit: cover;
+  object-position: center;
 }
 
 .home-section {
@@ -502,7 +494,7 @@ p {
   transition: background 0.15s ease, color 0.15s ease;
 }
 .home-page .home-experience-row:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--hover-fg);
 }
 .home-page .home-experience-row:hover .home-experience-row__plain {
@@ -569,7 +561,7 @@ p {
   transition: background 0.15s ease, color 0.15s ease;
 }
 .project-row:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--hover-fg) !important;
 }
 
@@ -588,7 +580,7 @@ p {
   transition: background 0.15s ease, color 0.15s ease;
 }
 .writing-row:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--hover-fg) !important;
 }
 .writing-row--list {
@@ -621,7 +613,7 @@ p {
   align-self: center;
 }
 .affiliation-link:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--hover-fg);
 }
 /* Same vertical extent as the text line; bitmap centered inside the frame */
@@ -657,8 +649,13 @@ p {
   border-radius: var(--pill-radius);
   transition: background 0.15s ease, color 0.15s ease;
 }
+.pill-link.pill-link--underline {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
 .pill-link:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--hover-fg);
 }
 .pill-link-arrow {
@@ -687,5 +684,5 @@ p {
   transition: background 0.15s ease;
 }
 .header-back-link:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.05);
 }

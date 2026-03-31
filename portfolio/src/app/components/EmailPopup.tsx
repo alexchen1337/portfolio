@@ -36,7 +36,7 @@ export default function EmailPopup({
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 9999,
-        animation: 'fadeIn 0.2s ease-in',
+        animation: 'none',
       }}
     >
       <div
@@ -49,7 +49,7 @@ export default function EmailPopup({
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           maxWidth: '380px',
           width: '100%',
-          animation: 'slideUp 0.3s ease-out',
+          animation: 'none',
           position: 'relative',
         }}
       >
@@ -133,12 +133,6 @@ export default function EmailPopup({
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
