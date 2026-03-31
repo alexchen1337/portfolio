@@ -20,7 +20,7 @@ const SPOTIFY_PROFILE =
 
 const projects = [
   { title: "valorant tracker tui", link: "https://github.com/alexchen1337/valorant-tracker-tui" },
-  { title: "speakwell", link: "https://github.com/alexchen1337/SpeakWell" },
+  { title: "speakwell", link: "https://speakwell-utk.vercel.app/" },
   { title: "ai summary footer", link: "https://www.npmjs.com/package/ai-summary-footer" },
   { title: "smart ride", link: "https://github.com/ericcht/Smart-Ride" },
   { title: "socket chat server", link: "https://github.com/alexchen1337/multithreaded-socket-chat-server" },
