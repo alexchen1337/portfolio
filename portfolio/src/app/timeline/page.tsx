@@ -7,7 +7,7 @@ interface Experience {
   title: string;
   company: string;
   location: string;
-  logo: string;
+  logo?: string;
 }
 
 export default function Experience() {
@@ -16,9 +16,8 @@ export default function Experience() {
     {
       year: "Jun 2026",
       title: "Incoming Software Engineering Intern",
-      company: "Startup (Stealth Mode)",
-      location: "New York, NY",
-      logo: "/globe.svg"
+      company: "Melius",
+      location: "New York, NY"
     },
     {
       year: "Mar 2026",
@@ -94,37 +93,41 @@ export default function Experience() {
                 padding: '1.5rem 0',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
               }}>
-                <div style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '12px',
-                  backgroundColor: '#fff',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  overflow: 'hidden',
-                  transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)';
-                }}>
-                  <Image
-                    src={exp.logo}
-                    alt={`${exp.company} logo`}
-                    width={40}
-                    height={40}
-                    style={{
-                      objectFit: 'contain'
-                    }}
-                  />
-                </div>
+                {exp.logo ? (
+                  <div style={{
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '12px',
+                    backgroundColor: '#fff',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)';
+                  }}>
+                    <Image
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      width={40}
+                      height={40}
+                      style={{
+                        objectFit: 'contain'
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div style={{ width: '56px', flexShrink: 0 }} aria-hidden />
+                )}
 
                 <div style={{
                   flex: 1,

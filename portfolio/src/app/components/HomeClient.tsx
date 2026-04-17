@@ -6,10 +6,10 @@ import Link from 'next/link';
 import EmailPopup from './EmailPopup';
 
 const EXPERIENCES: Array<
-  | { kind: 'affiliation'; href: string; logo: string; label: string; date: string }
+  | { kind: 'affiliation'; href: string; logo?: string; label: string; date: string }
   | { kind: 'plain'; label: string; date: string }
 > = [
-  { kind: 'plain', label: 'incoming eng @ startup', date: 'summer 2026' },
+  { kind: 'affiliation', href: 'https://www.melius.com', label: 'incoming eng @ melius', date: 'summer 2026' },
   { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', label: 'eng @ google', date: 'spring 2026' },
   { kind: 'affiliation', href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', label: 'eng @ marci lab', date: 'fall 2026' },
   { kind: 'affiliation', href: 'https://www.asknexus.ai/', logo: '/nexus.png', label: 'eng @ nexus', date: 'spring 2025/summer 2025' },
@@ -21,7 +21,8 @@ const SPOTIFY_PROFILE =
 const projects = [
   { title: "valorant tracker tui", link: "https://github.com/alexchen1337/valorant-tracker-tui" },
   { title: "speakwell", link: "https://speakwell-utk.vercel.app/" },
-  { title: "ai summary footer", link: "https://www.npmjs.com/package/ai-summary-footer" },
+  { title: "portui (600+ downloads)", link: "https://www.npmjs.com/package/portui" },
+  { title: "ai summary footer (150+ downloads)", link: "https://www.npmjs.com/package/ai-summary-footer" },
   { title: "smart ride", link: "https://github.com/ericcht/Smart-Ride" },
   { title: "socket chat server", link: "https://github.com/alexchen1337/multithreaded-socket-chat-server" },
 ];
@@ -99,12 +100,16 @@ export default function HomeClient() {
               className="home-experience-row home-experience-row--link"
             >
               <span className="home-experience-row__left">
-                <span className="home-experience-row__affiliation">
-                  <span className="affiliation-link__label">{exp.label}</span>
-                  <span className="affiliation-logo-wrap" aria-hidden>
-                    <img src={exp.logo} alt="" className="affiliation-logo" />
+                {exp.logo ? (
+                  <span className="home-experience-row__affiliation">
+                    <span className="affiliation-link__label">{exp.label}</span>
+                    <span className="affiliation-logo-wrap" aria-hidden>
+                      <img src={exp.logo} alt="" className="affiliation-logo" />
+                    </span>
                   </span>
-                </span>
+                ) : (
+                  <span className="home-experience-row__plain">{exp.label}</span>
+                )}
               </span>
               <span className="list-meta home-experience-row__date">{exp.date}</span>
             </a>
