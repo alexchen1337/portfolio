@@ -15,13 +15,14 @@ export default function Experience() {
   const experiences: Experience[] = [
     {
       year: "Jun 2026",
-      title: "Incoming Software Engineering Intern",
+      title: "Incoming Founding Engineer",
       company: "Melius",
-      location: "New York, NY"
+      location: "New York, NY",
+      logo: "/melius.png"
     },
     {
-      year: "Mar 2026",
-      title: "Incoming Software Engineering Intern",
+      year: "Mar 2026 — Present",
+      title: "Software Engineering Intern",
       company: "Google",
       location: "New York, NY",
       logo: "/google.png"

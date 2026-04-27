@@ -9,10 +9,10 @@ const EXPERIENCES: Array<
   | { kind: 'affiliation'; href: string; logo?: string; label: string; date: string }
   | { kind: 'plain'; label: string; date: string }
 > = [
-  { kind: 'affiliation', href: 'https://www.melius.com', label: 'incoming eng @ melius', date: 'summer 2026' },
-  { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', label: 'eng @ google', date: 'spring 2026' },
-  { kind: 'affiliation', href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', label: 'eng @ marci lab', date: 'fall 2026' },
-  { kind: 'affiliation', href: 'https://www.asknexus.ai/', logo: '/nexus.png', label: 'eng @ nexus', date: 'spring 2025/summer 2025' },
+  { kind: 'affiliation', href: 'https://www.melius.com', logo: '/melius.png', label: 'incoming founding engineer | melius', date: 'summer 2026' },
+  { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', label: 'software engineer intern | google', date: 'mar 2026 — present' },
+  { kind: 'affiliation', href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', label: 'research software engineer | marci lab', date: 'nov 2025 — present' },
+  { kind: 'affiliation', href: 'https://www.asknexus.ai/', logo: '/nexus.png', label: 'software engineer intern | nexus', date: 'mar 2025 — aug 2025' },
 ];
 
 const SPOTIFY_PROFILE =
