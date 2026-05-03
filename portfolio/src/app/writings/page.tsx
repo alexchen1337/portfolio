@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getAllWritings } from "@/lib/writings";
+import { getListedWritings } from "@/lib/writings";
 
 export default function WritingsPage() {
-  const writings = getAllWritings();
+  const writings = getListedWritings();
 
   return (
     <div className="copy-body">
