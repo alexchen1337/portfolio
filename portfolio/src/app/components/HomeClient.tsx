@@ -9,8 +9,8 @@ const EXPERIENCES: Array<
   | { kind: 'affiliation'; href: string; logo?: string; label: string; date: string }
   | { kind: 'plain'; label: string; date: string }
 > = [
-  { kind: 'affiliation', href: 'https://www.melius.com', logo: '/melius.png', label: 'incoming software engineer | melius', date: 'present' },
-  { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', label: 'software engineer intern | google', date: 'mar 2026 — present' },
+  { kind: 'affiliation', href: 'https://www.melius.com', logo: '/melius.png', label: 'member of technical staff | melius', date: 'jun 2026' },
+  { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', label: 'software engineer intern | google', date: 'mar 2026 — jun 2026' },
   { kind: 'affiliation', href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', label: 'research software engineer | marci lab', date: 'nov 2025 — feb 2026' },
   { kind: 'affiliation', href: 'https://www.asknexus.ai/', logo: '/nexus.png', label: 'software engineer intern | nexus', date: 'mar 2025 — aug 2025' },
 ];
