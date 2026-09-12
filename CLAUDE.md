@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal portfolio website built with Next.js 16 (App Router), React 19, TypeScript, and Framer Motion. The site features a home page, timeline/experience section, projects showcase, and a writings/blog section. It uses styled-jsx for component-scoped styling and is deployed on Vercel with analytics enabled.
+This is a personal portfolio website built with Next.js 16 (App Router), React 19, TypeScript, and Framer Motion. The site features a home page, timeline/experience section, writings/blog section, and Valorant clips. It uses styled-jsx for component-scoped styling and is deployed on Vercel with analytics enabled.
 
 ## Development Commands
 
@@ -26,7 +26,6 @@ portfolio/
 ├── src/app/                    # Next.js App Router pages
 │   ├── components/             # Shared components (Header)
 │   ├── instagram/              # Instagram page
-│   ├── projects/               # Projects showcase page
 │   ├── timeline/               # Experience/timeline page
 │   ├── writings/               # Blog posts directory
 │   │   ├── january-2026-reflection/

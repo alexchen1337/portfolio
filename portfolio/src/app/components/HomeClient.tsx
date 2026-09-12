@@ -18,15 +18,6 @@ const EXPERIENCES: Array<
 const SPOTIFY_PROFILE =
   'https://open.spotify.com/user/6z3faxr3uj7zcwdr2idhbsxmy?si=e1d22e4bbd0e439a';
 
-const projects = [
-  { title: "valorant tracker tui", link: "https://github.com/alexchen1337/valorant-tracker-tui" },
-  { title: "speakwell", link: "https://speakwell-utk.vercel.app/" },
-  { title: "portui (600+ downloads)", link: "https://www.npmjs.com/package/portui" },
-  { title: "ai summary footer (150+ downloads)", link: "https://www.npmjs.com/package/ai-summary-footer" },
-  { title: "smart ride", link: "https://github.com/ericcht/Smart-Ride" },
-  { title: "socket chat server", link: "https://github.com/alexchen1337/multithreaded-socket-chat-server" },
-];
-
 export default function HomeClient() {
   const [showEmailPopup, setShowEmailPopup] = useState(false);
 
@@ -124,24 +115,8 @@ export default function HomeClient() {
         )}
       </div>
 
-      {/* proj */}
-      <div className="stagger-3 home-section home-section--stack">
-        <span className="section-label home-section__label-pad">// proj</span>
-        {projects.map((project, i) => (
-          <a
-            key={i}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-row"
-          >
-            {project.title}
-          </a>
-        ))}
-      </div>
-
       {/* yapping */}
-      <div className="stagger-4 home-section home-section--stack">
+      <div className="stagger-3 home-section home-section--stack">
         <span className="section-label home-section__label-pad">// yapping</span>
         <div className="home-section__under-label valorant-home-inner">
           <span>me rambling</span>
@@ -153,7 +128,7 @@ export default function HomeClient() {
       </div>
 
       {/* valorant */}
-      <div className="stagger-5 home-section home-section--stack">
+      <div className="stagger-4 home-section home-section--stack">
         <span className="section-label home-section__label-pad">// valorant</span>
         <div className="home-section__under-label valorant-home-inner">
           <span>3x radiant, used to compete</span>
