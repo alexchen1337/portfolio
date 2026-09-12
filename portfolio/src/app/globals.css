@@ -355,7 +355,7 @@ p {
   /*
     --home-section-pad-y: vertical padding for each // section block
     --home-section-gap: gap between pills in a row + under-label flex gap
-    --home-row-pad-y: vertical padding inside project + writing rows
+    --home-row-pad-y: vertical padding inside writing rows
     Site default for these is in :root; home overrides below for a denser landing.
   */
   --home-section-pad-y: 13px;
@@ -453,7 +453,7 @@ p {
   padding-bottom: 10px;
 }
 
-/* Body under // labels: same horizontal inset as project/writing rows */
+/* Body under // labels: same horizontal inset as writing rows */
 .home-section__under-label {
   display: flex;
   flex-wrap: wrap;
@@ -535,7 +535,6 @@ p {
   gap: 0.55em;
 }
 
-.home-page .project-row,
 .home-page .writing-row {
   padding: var(--home-row-pad-y) var(--home-row-pad-x);
   margin: 2px 0; /* row breathing room; set to 0 for tighter lists */
@@ -546,25 +545,6 @@ p {
 }
 
 /* Rounded pill / capsule hover (background), not text-only color */
-.project-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 8px 12px;
-  margin: 2px 0;
-  border-radius: var(--pill-radius);
-  font-size: var(--home-copy-size);
-  font-weight: var(--section-label-weight);
-  letter-spacing: var(--section-label-tracking);
-  color: var(--foreground);
-  text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-.project-row:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--hover-fg) !important;
-}
-
 .writing-row {
   display: flex;
   align-items: baseline;
@@ -664,15 +644,6 @@ p {
 }
 .pill-link:hover .pill-link-arrow {
   transform: translateX(3px);
-}
-
-/* Light cards (projects page) */
-.pill-link.pill-link--light {
-  color: #1d1d1f;
-}
-.pill-link.pill-link--light:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #1d1d1f;
 }
 
 .header-back-link {
