@@ -70,7 +70,7 @@ So many more memories I don't have pictures of:
 - Random wagers
 - Trying to come up with viral tweets
 
-So when people ask me why I joined, this is what I want to tell them. Rejecting any offer in bed tech was a no-brainer, I haven't felt so involved in the mission and wanted to win so badly with a group of people before.
+So when people ask me why I joined, this is what I want to tell them. Rejecting any offer in big tech was a no-brainer, I haven't felt so involved in the mission and wanted to win so badly with a group of people before.
 
 If you are cracked and interested in joining, you should apply :)
 
