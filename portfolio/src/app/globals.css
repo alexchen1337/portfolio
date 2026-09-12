@@ -307,7 +307,7 @@ p {
   background: none;
 }
 .writings-markdown strong {
-  color: #dde4ec;
+  color: var(--writings-body);
   font-weight: 600;
 }
 .writings-markdown em {
@@ -326,6 +326,22 @@ p {
   border: none;
   border-top: 1px solid var(--border);
   margin: 2.5rem 0;
+}
+.writings-markdown img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-block: 1rem 2rem;
+  border-radius: 4px;
+}
+.writings-markdown .writings-photo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.writings-markdown .writings-photo-row img {
+  margin: 0;
 }
 .writings-back-link:hover {
   color: var(--foreground);
