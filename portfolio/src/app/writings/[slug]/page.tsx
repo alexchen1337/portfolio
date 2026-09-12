@@ -21,7 +21,7 @@ export default async function WritingPage({ params }: Props) {
   }
 
   return (
-    <article className="writings-article">
+    <article className="writings-article" data-writing={writing.slug}>
       <header className="writings-article__header">
         <h1 className="writings-article__title">{writing.title}</h1>
         <time className="writings-article__date" dateTime={writing.date}>

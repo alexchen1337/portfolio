@@ -3,7 +3,7 @@ title: "why i joined melius"
 date: 2026-09-12
 ---
 
-I've been asked by my parents, friends, and randoms: why did you join Melius?
+I've been asked by my parents, friends, and randoms: **why did you join Melius?**
 
 After reflecting on my past few months starting full-time here, I realize that places like Melius are the only workplaces where life doesn't feel mundane, and where I don't mind that I see these people more than my own family.
 
@@ -27,33 +27,38 @@ Anyways, let's show off the fun stuff.
 
 ---
 
-**Shitposting with my boss (I'm not even an intern??)**
+<div class="writings-photo-grid">
+  <figure>
+    <img src="/writings/why-i-joined-melius/shitposting.jpg" alt="Shitposting with my boss at Melius" width="360">
+    <figcaption>Shitposting with my boss (I'm not even an intern??)</figcaption>
+  </figure>
+  <figure>
+    <img src="/writings/why-i-joined-melius/birthday.jpg" alt="Celebrating my 21st birthday with the team" width="360">
+    <figcaption>Getting two tables at a night club for my 21st birthday (thx Joowon)</figcaption>
+  </figure>
+  <figure>
+    <img src="/writings/why-i-joined-melius/smash.jpg" alt="Playing Super Smash Bros with coworkers at the office" width="360">
+    <figcaption>I've probably spent over 200 hours playing Super Smash Bros with Young, Ray, Jahow, and Arnav. There have been many days where I've stayed at the office past 9pm to play Smash.</figcaption>
+  </figure>
+  <figure>
+    <img src="/writings/why-i-joined-melius/vibe-coded-game.jpg" alt="Playing a vibe-coded game together" width="360">
+    <figcaption>Playing vibe-coded game together</figcaption>
+  </figure>
+</div>
 
-<img src="/writings/why-i-joined-melius/shitposting.jpg" alt="Shitposting with my boss at Melius" width="360">
+<figure class="writings-photo-wide">
+  <img src="/writings/why-i-joined-melius/offsite.jpg" alt="The Melius team at our company launch offsite" width="480">
+  <figcaption>Company offsite for our launch, with a private chef :)</figcaption>
+</figure>
 
-**Getting two tables at a night club for my 21st birthday (thx Joowon)**
-
-<img src="/writings/why-i-joined-melius/birthday.jpg" alt="Celebrating my 21st birthday with the team" width="360">
-
-**I've probably spent over 200 hours playing Super Smash Bros with Young, Ray, Jahow, and Arnav. There have been many days where I've stayed at the office past 9pm to play Smash.**
-
-<img src="/writings/why-i-joined-melius/smash.jpg" alt="Playing Super Smash Bros with coworkers at the office" width="360">
-
-**Company offsite for our launch, with a private chef :)**
-
-<img src="/writings/why-i-joined-melius/offsite.jpg" alt="The Melius team at our company launch offsite" width="480">
-
-**Playing vibe-coded game together**
-
-<img src="/writings/why-i-joined-melius/vibe-coded-game.jpg" alt="Playing a vibe-coded game together" width="360">
-
-<p class="writings-photo-row">
-  <img src="/writings/why-i-joined-melius/outings-1.jpg" alt="An outing with Melius coworkers" width="240">
-  <img src="/writings/why-i-joined-melius/outings-2.jpg" alt="Another spontaneous team outing" width="240">
-  <img src="/writings/why-i-joined-melius/outings-3.jpg" alt="More memories from an outing with the team" width="240">
-</p>
-
-**A bunch of random impulse outings for food, drinks, or sweet treats**
+<figure>
+  <div class="writings-photo-strip">
+    <img src="/writings/why-i-joined-melius/outings-1.jpg" alt="An outing with Melius coworkers" width="240">
+    <img src="/writings/why-i-joined-melius/outings-2.jpg" alt="Another spontaneous team outing" width="240">
+    <img src="/writings/why-i-joined-melius/outings-3.jpg" alt="More memories from an outing with the team" width="240">
+  </div>
+  <figcaption>A bunch of random impulse outings for food, drinks, or sweet treats</figcaption>
+</figure>
 
 ---
 
