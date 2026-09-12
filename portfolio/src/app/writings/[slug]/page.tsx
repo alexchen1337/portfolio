@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { getWritingBySlug, getAllWritings } from "@/lib/writings";
 
 interface Props {
@@ -20,7 +21,7 @@ export default async function WritingPage({ params }: Props) {
   }
 
   return (
-    <article className="writings-article">
+    <article className="writings-article" data-writing={writing.slug}>
       <header className="writings-article__header">
         <h1 className="writings-article__title">{writing.title}</h1>
         <time className="writings-article__date" dateTime={writing.date}>
@@ -28,12 +29,13 @@ export default async function WritingPage({ params }: Props) {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: "UTC",
           }).toLowerCase()}
         </time>
       </header>
 
       <div className="writings-markdown">
-        <ReactMarkdown>{writing.content}</ReactMarkdown>
+        <ReactMarkdown rehypePlugins={[rehypeRaw]}>{writing.content}</ReactMarkdown>
       </div>
     </article>
   );

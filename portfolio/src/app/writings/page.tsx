@@ -26,6 +26,7 @@ export default function WritingsPage() {
                 {new Date(writing.date).toLocaleDateString("en-US", {
                   month: "short",
                   year: "numeric",
+                  timeZone: "UTC",
                 }).toLowerCase()}
               </span>
             </Link>
