@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import HalftoneWaves from "./components/HalftoneWaves";
 import { Analytics } from "@vercel/analytics/next"
 
 const jetbrainsMono = JetBrains_Mono({
@@ -12,6 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "alex chen",
   description: "personal portfolio",
+  icons: { icon: { url: '/frieren-spinning.gif', type: 'image/gif' } },
 };
 
 export default function RootLayout({
@@ -22,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={jetbrainsMono.variable} suppressHydrationWarning>
+        <HalftoneWaves />
         <div className="container">
           <Header />
           <main className="main-content">

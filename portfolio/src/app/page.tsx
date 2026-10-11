@@ -1,5 +1,6 @@
 import HomeClient from "./components/HomeClient";
+import PortfolioIntro from "./components/PortfolioIntro";
 
 export default function Home() {
-  return <HomeClient />;
+  return <PortfolioIntro><HomeClient /></PortfolioIntro>;
 }
