@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 const DOT_SPACING = 4;
 const DOT_SIZES = 10;
@@ -8,8 +9,12 @@ const FRAME_INTERVAL = 1000 / 24;
 
 export default function HalftoneWaves() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pathname = usePathname();
+  const isWritingPost = /^\/writings\/.+/.test(pathname);
 
   useEffect(() => {
+    if (isWritingPost) return;
+
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
@@ -105,7 +110,7 @@ export default function HalftoneWaves() {
       reducedMotion.removeEventListener('change', syncAnimation);
       document.removeEventListener('visibilitychange', syncAnimation);
     };
-  }, []);
+  }, [isWritingPost]);
 
-  return <canvas ref={canvasRef} className="halftone-waves" aria-hidden="true" />;
+  return isWritingPost ? null : <canvas ref={canvasRef} className="halftone-waves" aria-hidden="true" />;
 }

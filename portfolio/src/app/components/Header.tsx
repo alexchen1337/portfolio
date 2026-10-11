@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import HalftoneName from "./HalftoneName";
 
 export default function Header() {
   const pathname = usePathname();
@@ -9,7 +10,6 @@ export default function Header() {
   /** Individual post: /writings/[slug] — back goes to index, not home */
   const isWritingPost = /^\/writings\/.+/.test(pathname);
   const backHref = isWritingPost ? '/writings' : '/';
-  const backLabel = isWritingPost ? 'writings' : 'alex chen';
 
   if (isHomePage) return null;
 
@@ -28,7 +28,8 @@ export default function Header() {
           gap: '8px',
         }}
       >
-        <span style={{ color: 'var(--dim)' }}>{'<-'}</span> {backLabel}
+        <span style={{ color: 'var(--dim)' }}>{'<-'}</span>
+        {isWritingPost ? 'writings' : <HalftoneName variant="header" />}
       </Link>
     </header>
   );

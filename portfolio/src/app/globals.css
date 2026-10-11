@@ -41,6 +41,10 @@ body {
   line-height: 1.6;
 }
 
+body:has(.writings-article) {
+  padding-bottom: 2rem;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -514,6 +518,12 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.home-page__name--header {
+  width: 78px;
+  height: 18px;
+  font-size: 14px;
 }
 
 .home-page__name[data-rendered] .home-page__name-fallback {
