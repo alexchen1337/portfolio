@@ -8,7 +8,7 @@ const DURATION = 1400;
 const FRAME_INTERVAL = 65;
 const DOT_SPACING = 1.3;
 
-export default function HalftoneName() {
+export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 'header' }) {
   const wrapperRef = useRef<HTMLSpanElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -153,7 +153,7 @@ export default function HalftoneName() {
   }, []);
 
   return (
-    <span ref={wrapperRef} className="home-page__name" role="img" aria-label={NAME}>
+    <span ref={wrapperRef} className={`home-page__name home-page__name--${variant}`} role="img" aria-label={NAME}>
       <span className="home-page__name-fallback" aria-hidden="true">{NAME}</span>
       <canvas ref={canvasRef} className="home-page__name-canvas" aria-hidden="true" />
     </span>

@@ -7,7 +7,6 @@ export default function WritingsPage() {
   return (
     <div className="copy-body">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
-        <span className="section-label" style={{ paddingBottom: '16px' }}>// yapping</span>
         {writings.length === 0 ? (
           <p style={{ color: "var(--dim)" }}>no writings yet.</p>
         ) : (
