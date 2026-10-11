@@ -3,6 +3,8 @@
   --foreground: #333333;
   --muted: #666666;
   --accent: #333333;
+  --halftone-ink: #53366b;
+  --intro-name-ink: #111111;
   --green: #2f7d32;
   --border: rgba(0, 0, 0, 0.10);
   --dim: rgba(0, 0, 0, 0.45);
@@ -27,6 +29,8 @@ body {
 }
 
 body {
+  --waves-height: clamp(120px, 22vh, 200px);
+  padding-bottom: var(--waves-height);
   color: var(--foreground);
   background-color: var(--background);
   background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
@@ -54,9 +58,57 @@ a:hover {
 }
 
 .container {
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.halftone-waves {
+  position: fixed;
+  inset: auto 0 0;
+  display: block;
+  width: 100%;
+  height: var(--waves-height);
+  pointer-events: none;
+  user-select: none;
+}
+
+.portfolio-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.portfolio-intro--pending {
+  background: var(--background);
+}
+
+.portfolio-intro__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.portfolio-intro__name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.portfolio-intro-content[data-intro-state="docking"] .home-page__name {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-intro {
+    display: none;
+  }
 }
 
 /* Home landing outer padding — tweak with .home-page vars below */
@@ -446,10 +498,26 @@ p {
   padding-bottom: 17px;
 }
 .home-page__name {
-  font-size: 16px;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 122px;
+  height: 26px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--accent);
+}
+
+.home-page__name-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-page__name[data-rendered] .home-page__name-fallback {
+  visibility: hidden;
 }
 
 .home-page__top {
@@ -467,8 +535,41 @@ p {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 8px;
   min-width: 0;
+}
+
+.home-page__socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.home-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.home-social-link:hover,
+.home-social-link:focus-visible {
+  opacity: 1;
+}
+
+.home-social-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.home-social-link:active {
+  transform: translateY(1px);
 }
 
 .home-page__avatar-link {
@@ -499,11 +600,17 @@ p {
 
 .home-page__avatar {
   display: block;
-  width: 48px;
-  height: 48px;
+  width: 112px;
+  height: auto;
   border-radius: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+}
+
+@media (max-width: 768px) {
+  .home-page__avatar {
+    width: 88px;
+  }
 }
 
 .home-section {
@@ -519,6 +626,15 @@ p {
   flex-wrap: nowrap;
   align-items: stretch;
   gap: 0;
+}
+
+.home-misc {
+  display: grid;
+  gap: 12px;
+}
+
+.home-misc__note {
+  white-space: nowrap;
 }
 
 .home-section__label-pad {
@@ -604,7 +720,162 @@ p {
 .home-page .home-experience-row__affiliation {
   display: inline-flex;
   align-items: center;
-  gap: 0.55em;
+  gap: 12px;
+}
+
+.home-experience-row__company {
+  display: inline-grid;
+  grid-template-columns: 14px auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-experience-row__company > span:first-child {
+  grid-column: 2;
+  grid-row: 1;
+  white-space: nowrap;
+}
+
+.home-experience-row__company .affiliation-logo-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  width: 14px;
+  height: 18px;
+}
+
+@media (max-width: 600px) {
+  body:has(.home-page) {
+    --waves-height: clamp(100px, 16svh, 132px);
+    position: relative;
+    min-height: 100svh;
+  }
+
+  body:has(.home-page) .halftone-waves {
+    position: absolute;
+  }
+
+  .container:has(.home-page) {
+    padding: 24px 24px 28px;
+  }
+
+  .main-content:has(.home-page) {
+    min-height: 0;
+  }
+
+  .home-page {
+    --home-section-pad-y: 16px;
+    --home-row-pad-x: 0px;
+    letter-spacing: 0.015em;
+  }
+
+  .home-page .home-page__top {
+    align-items: flex-start;
+    padding-right: 0;
+    padding-bottom: 14px;
+  }
+
+  .home-page__top-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .home-page__socials {
+    gap: 0;
+    margin-left: -10px;
+    margin-top: -2px;
+  }
+
+  .home-social-link {
+    width: 36px;
+    height: 36px;
+    opacity: 0.8;
+  }
+
+  .home-social-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .home-page__avatar-link {
+    border: 0;
+    height: 60px;
+    align-items: flex-end;
+    overflow: visible;
+  }
+
+  .home-page .home-section__label-pad {
+    padding-bottom: 12px;
+  }
+
+  .home-page .home-experience-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 12px;
+    padding: 14px 0;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.01em;
+  }
+
+  .home-page .home-experience-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .home-page .home-experience-row__left,
+  .home-page .home-experience-row__affiliation {
+    display: contents;
+  }
+
+  .home-experience-row__role,
+  .home-page .home-experience-row__plain {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .home-experience-row__company {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .home-page .home-experience-row__date {
+    grid-column: 2;
+    grid-row: 2;
+    margin-left: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+
+  .home-misc {
+    gap: 4px;
+  }
+
+  .home-page .home-section__under-label {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    min-height: 44px;
+  }
+
+  .home-page .valorant-home-inner .valorant-home-sep {
+    display: none;
+  }
+
+  .home-page .valorant-home-inner .pill-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+  }
 }
 
 .home-page .writing-row {
