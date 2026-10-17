@@ -26,7 +26,7 @@ export default function HomeClient() {
     <div className="home-page" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
 
       {/* header: name + socials | avatar */}
-      <div className="stagger-1 home-page__top">
+      <div className="home-page__top">
         <div className="home-page__top-left">
           <HalftoneName />
 
@@ -85,7 +85,7 @@ export default function HomeClient() {
       </div>
 
       {/* exp */}
-      <div className="stagger-2 home-section home-section--stack">
+      <div className="home-section home-section--stack">
         <span className="section-label home-section__label-pad">// exp</span>
         {EXPERIENCES.map((exp, i) =>
           exp.kind === 'affiliation' ? (
@@ -124,7 +124,7 @@ export default function HomeClient() {
       </div>
 
       {/* misc */}
-      <div className="stagger-3 home-section home-section--stack">
+      <div className="home-section home-section--stack">
         <span className="section-label home-section__label-pad">// misc</span>
         <div className="home-misc">
           <div className="home-section__under-label valorant-home-inner">

@@ -11,6 +11,10 @@ const REVEAL_DURATION = 700;
 const DOT_SIZES = 12;
 let hasPlayedIntro = false;
 
+export function willPlayIntro() {
+  return !hasPlayedIntro;
+}
+
 function smoothstep(value: number) {
   const clamped = Math.max(0, Math.min(1, value));
   return clamped * clamped * (3 - 2 * clamped);
