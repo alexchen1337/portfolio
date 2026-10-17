@@ -76,6 +76,12 @@ a:hover {
   height: var(--waves-height);
   pointer-events: none;
   user-select: none;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Posts drop the waves for reading; they sink away instead of vanishing */
+.halftone-waves[data-sunk] {
+  transform: translateY(100%);
 }
 
 .portfolio-intro {
@@ -113,6 +119,10 @@ a:hover {
   .portfolio-intro {
     display: none;
   }
+
+  .halftone-waves {
+    transition: none;
+  }
 }
 
 /* Home landing outer padding — tweak with .home-page vars below */
@@ -135,23 +145,40 @@ a:hover {
 
 .main-content {
   min-height: 60vh;
-  animation: none;
 }
 
-/* No route transition on /writings — reading stays static */
-.main-content:has(.writings-reading-root) {
-  animation: none;
+/* Route + header transitions: content prints in through a halftone screen,
+   the same dot language as the intro and the waves */
+@property --halftone-dot {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
 }
 
-@keyframes pageLoad {
-  from { opacity: 1; transform: none; }
-  to { opacity: 1; transform: none; }
+@keyframes halftoneReveal {
+  from {
+    --halftone-dot: 0px;
+    transform: translateY(6px);
+  }
+  to {
+    /* Past half the tile diagonal, so neighbouring dots fully merge */
+    --halftone-dot: 3.6px;
+    transform: none;
+  }
 }
 
-/* Route template (App Router) — opacity-only, matches template.tsx */
-@keyframes routeTransition {
-  from { opacity: 1; }
-  to { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .halftone-reveal,
+  .email-popup__card {
+    -webkit-mask-image: radial-gradient(circle, #000 var(--halftone-dot), transparent calc(var(--halftone-dot) + 0.5px));
+    mask-image: radial-gradient(circle, #000 var(--halftone-dot), transparent calc(var(--halftone-dot) + 0.5px));
+    -webkit-mask-size: 5px 5px;
+    mask-size: 5px 5px;
+  }
+
+  .halftone-reveal {
+    animation: halftoneReveal 600ms cubic-bezier(0.33, 1, 0.68, 1) both;
+  }
 }
 
 h1, h2, h3 {
@@ -186,19 +213,6 @@ p {
 
 .font-mono {
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
-}
-
-.stagger-1 { animation: none; }
-.stagger-2 { animation: none; }
-.stagger-3 { animation: none; }
-.stagger-4 { animation: none; }
-.stagger-5 { animation: none; }
-.stagger-6 { animation: none; }
-.stagger-7 { animation: none; }
-
-@keyframes fadeIn {
-  from { opacity: 1; transform: none; }
-  to { opacity: 1; transform: none; }
 }
 
 /* /writings — reading typography (layout wraps with .writings-reading-root) */
@@ -1009,4 +1023,67 @@ p {
 }
 .header-back-link:hover {
   background: rgba(0, 0, 0, 0.05);
+}
+.header-back-link__arrow {
+  display: inline-block;
+  color: var(--dim);
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+.header-back-link:hover .header-back-link__arrow {
+  color: var(--muted);
+  transform: translateX(-3px);
+}
+
+.email-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(17, 17, 17, 0.16);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: emailPopupFade 200ms ease-out both;
+}
+.email-popup--closing {
+  animation: emailPopupFadeOut 200ms ease-in both;
+}
+.email-popup__card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 1.75rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  background-color: var(--background);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  --halftone-dot: 3.6px;
+  animation: halftoneReveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.email-popup--closing .email-popup__card {
+  animation: halftoneConceal 200ms ease-in both;
+}
+
+@keyframes emailPopupFade {
+  from { opacity: 0; }
+}
+
+@keyframes emailPopupFadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes halftoneConceal {
+  to {
+    --halftone-dot: 0px;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-popup__card {
+    animation: none;
+  }
 }

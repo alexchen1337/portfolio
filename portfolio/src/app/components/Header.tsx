@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HalftoneName from "./HalftoneName";
+import HalftoneReveal from "./HalftoneReveal";
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,22 +16,24 @@ export default function Header() {
 
   return (
     <header style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '1.5rem 0 1rem' }}>
-      <Link
-        href={backHref}
-        className="header-back-link"
-        style={{
-          fontSize: '14px',
-          fontWeight: 700,
-          color: 'var(--accent)',
-          textDecoration: 'none',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
-        <span style={{ color: 'var(--dim)' }}>{'<-'}</span>
-        {isWritingPost ? 'writings' : <HalftoneName variant="header" />}
-      </Link>
+      <HalftoneReveal key={backHref}>
+        <Link
+          href={backHref}
+          className="header-back-link"
+          style={{
+            fontSize: '14px',
+            fontWeight: 700,
+            color: 'var(--accent)',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span className="header-back-link__arrow">{'<-'}</span>
+          {isWritingPost ? 'writings' : <HalftoneName variant="header" />}
+        </Link>
+      </HalftoneReveal>
     </header>
   );
 }

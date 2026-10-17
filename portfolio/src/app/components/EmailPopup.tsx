@@ -10,6 +10,7 @@ export default function EmailPopup({
   onClose: () => void; 
 }) {
   const [copied, setCopied] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText('chen.alex603@gmail.com');
@@ -19,42 +20,21 @@ export default function EmailPopup({
 
   if (!show) return null;
 
+  const close = () => setIsClosing(true);
+
   return (
     <div
-      onClick={onClose}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        padding: '1rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        animation: 'none',
+      className={`email-popup${isClosing ? ' email-popup--closing' : ''}`}
+      onClick={close}
+      onAnimationEnd={(e) => {
+        if (e.target !== e.currentTarget || !isClosing) return;
+        setIsClosing(false);
+        onClose();
       }}
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          backgroundColor: '#161b22',
-          border: '1px solid #30363d',
-          padding: '1.75rem 2rem',
-          borderRadius: '12px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-          maxWidth: '380px',
-          width: '100%',
-          animation: 'none',
-          position: 'relative',
-        }}
-      >
+      <div className="email-popup__card" onClick={(e) => e.stopPropagation()}>
         <button
-          onClick={onClose}
+          onClick={close}
           style={{
             position: 'absolute',
             top: '1rem',
@@ -62,7 +42,7 @@ export default function EmailPopup({
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            color: '#8b949e',
+            color: 'var(--dim)',
             padding: 0,
             lineHeight: 1,
           }}
@@ -73,7 +53,7 @@ export default function EmailPopup({
           </svg>
         </button>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-          <p style={{ fontSize: '0.875rem', margin: 0, color: '#c9d1d9' }}>chen.alex603@gmail.com</p>
+          <p style={{ fontSize: '0.875rem', margin: 0, color: 'var(--foreground)' }}>chen.alex603@gmail.com</p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
           <button
@@ -84,7 +64,7 @@ export default function EmailPopup({
               border: 'none',
               cursor: 'pointer',
               padding: 0,
-              color: copied ? '#3fb950' : '#8b949e',
+              color: copied ? 'var(--green)' : 'var(--muted)',
               transition: 'color 0.2s',
               display: 'flex',
               flexDirection: 'column',
@@ -114,7 +94,7 @@ export default function EmailPopup({
               border: 'none',
               cursor: 'pointer',
               padding: 0,
-              color: '#8b949e',
+              color: 'var(--muted)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',

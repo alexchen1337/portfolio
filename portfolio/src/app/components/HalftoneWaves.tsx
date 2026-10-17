@@ -6,15 +6,15 @@ import { usePathname } from 'next/navigation';
 const DOT_SPACING = 4;
 const DOT_SIZES = 10;
 const FRAME_INTERVAL = 1000 / 24;
+const SINK_DURATION = 700;
 
 export default function HalftoneWaves() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const elapsedRef = useRef(0);
   const pathname = usePathname();
   const isWritingPost = /^\/writings\/.+/.test(pathname);
 
   useEffect(() => {
-    if (isWritingPost) return;
-
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
@@ -25,7 +25,8 @@ export default function HalftoneWaves() {
     let height = 0;
     let frameId = 0;
     let lastFrame = 0;
-    let elapsed = 0;
+    let isSunk = false;
+    let sinkTimeout = 0;
 
     const draw = (time: number) => {
       context.clearRect(0, 0, width, height);
@@ -72,17 +73,17 @@ export default function HalftoneWaves() {
     const animate = (timestamp: number) => {
       if (timestamp - lastFrame >= FRAME_INTERVAL) {
         // Clamp the delta so returning to a backgrounded tab stays smooth.
-        elapsed += Math.min(timestamp - lastFrame, 80) / 1000;
+        elapsedRef.current += Math.min(timestamp - lastFrame, 80) / 1000;
         lastFrame = timestamp;
-        draw(elapsed);
+        draw(elapsedRef.current);
       }
       frameId = window.requestAnimationFrame(animate);
     };
 
     const syncAnimation = () => {
       window.cancelAnimationFrame(frameId);
-      draw(elapsed);
-      if (!reducedMotion.matches && !document.hidden) {
+      draw(elapsedRef.current);
+      if (!isSunk && !reducedMotion.matches && !document.hidden) {
         lastFrame = performance.now();
         frameId = window.requestAnimationFrame(animate);
       }
@@ -96,7 +97,7 @@ export default function HalftoneWaves() {
       canvas.width = Math.round(width * pixelRatio);
       canvas.height = Math.round(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      draw(elapsed);
+      draw(elapsedRef.current);
     });
 
     resizeObserver.observe(canvas);
@@ -104,7 +105,16 @@ export default function HalftoneWaves() {
     document.addEventListener('visibilitychange', syncAnimation);
     syncAnimation();
 
+    // Keep the waves moving while they sink out of view, then stop drawing.
+    if (isWritingPost) {
+      sinkTimeout = window.setTimeout(() => {
+        isSunk = true;
+        syncAnimation();
+      }, SINK_DURATION);
+    }
+
     return () => {
+      window.clearTimeout(sinkTimeout);
       window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       reducedMotion.removeEventListener('change', syncAnimation);
@@ -112,5 +122,5 @@ export default function HalftoneWaves() {
     };
   }, [isWritingPost]);
 
-  return isWritingPost ? null : <canvas ref={canvasRef} className="halftone-waves" aria-hidden="true" />;
+  return <canvas ref={canvasRef} className="halftone-waves" data-sunk={isWritingPost || undefined} aria-hidden="true" />;
 }
