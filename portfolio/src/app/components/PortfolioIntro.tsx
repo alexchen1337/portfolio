@@ -328,7 +328,7 @@ export default function PortfolioIntro({ children }: { children: React.ReactNode
           <canvas ref={nameCanvasRef} className="portfolio-intro__name" aria-hidden="true" />
         </div>
       )}
-      <noscript><style>{'.portfolio-intro { display: none; }'}</style></noscript>
+      <noscript><style>{'.portfolio-intro { display: none; } body:has(.portfolio-intro) .paper-boat { visibility: visible; }'}</style></noscript>
     </>
   );
 }
