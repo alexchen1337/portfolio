@@ -1,118 +1,84 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function EmailPopup({ 
-  show, 
-  onClose 
-}: { 
-  show: boolean; 
-  onClose: () => void; 
-}) {
-  const [copied, setCopied] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+const EMAIL = 'chen.alex603@gmail.com';
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText('chen.alex603@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+type Props = { show: boolean; onClose: () => void };
+
+export default function EmailPopup({ show, onClose }: Props) {
+  return show ? <EmailDialog onClose={onClose} /> : null;
+}
+
+function EmailDialog({ onClose }: Pick<Props, 'onClose'>) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const mountedRef = useRef(false);
+  const [status, setStatus] = useState<'idle' | 'folding' | 'copied' | 'error'>('idle');
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    dialogRef.current?.showModal();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      mountedRef.current = false;
+      clearTimeout(timerRef.current);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!closing) return;
+    const timer = setTimeout(() => {
+      dialogRef.current?.close();
+      onClose();
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 200);
+    return () => clearTimeout(timer);
+  }, [closing, onClose]);
+
+  const copy = async () => {
+    clearTimeout(timerRef.current);
+    setStatus('folding');
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      if (!mountedRef.current) return;
+      timerRef.current = setTimeout(() => {
+        setStatus('copied');
+        timerRef.current = setTimeout(() => setStatus('idle'), 2200);
+      }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 360);
+    } catch {
+      if (mountedRef.current) setStatus('error');
+    }
   };
 
-  if (!show) return null;
-
-  const close = () => setIsClosing(true);
-
   return (
-    <div
-      className={`email-popup${isClosing ? ' email-popup--closing' : ''}`}
-      onClick={close}
-      onAnimationEnd={(e) => {
-        if (e.target !== e.currentTarget || !isClosing) return;
-        setIsClosing(false);
-        onClose();
-      }}
-    >
-      <div className="email-popup__card" onClick={(e) => e.stopPropagation()}>
-        <button
-          onClick={close}
-          style={{
-            position: 'absolute',
-            top: '1rem',
-            left: '1rem',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--dim)',
-            padding: 0,
-            lineHeight: 1,
-          }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-          <p style={{ fontSize: '0.875rem', margin: 0, color: 'var(--foreground)' }}>chen.alex603@gmail.com</p>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
-          <button
-            onClick={copyToClipboard}
-            title="copy"
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 0,
-              color: copied ? 'var(--green)' : 'var(--muted)',
-              transition: 'color 0.2s',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.3rem',
-              fontSize: '0.7rem',
-              fontFamily: 'inherit',
-            }}
-          >
-            {copied ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
+    <dialog ref={dialogRef} className={`email-popup${closing ? ' email-popup--closing' : ''}`}
+      aria-label="Email Alex" onCancel={(event) => { event.preventDefault(); setClosing(true); }}
+      onClick={(event) => { if (event.target === event.currentTarget) setClosing(true); }}>
+      <div className="email-popup__card">
+        <button type="button" className="email-close" aria-label="Close email dialog" onClick={() => setClosing(true)}>×</button>
+        <p className="email-address">{EMAIL}</p>
+        <div className="email-actions">
+          <button type="button" className="email-action" onClick={copy} disabled={status === 'folding'} data-status={status}>
+            <span className="email-copy-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                {status === 'copied' ? <path className="email-check" d="m4 12 5 5L20 6" /> : <>
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path className="email-flap" d="m3 6 9 7 9-7" />
+                </>}
               </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-            )}
-            {copied ? 'copied!' : 'copy'}
+            </span>
+            <span>{status === 'copied' ? 'copied!' : status === 'folding' ? 'folding…' : 'copy email'}</span>
           </button>
-          <a
-            href="mailto:chen.alex603@gmail.com"
-            title="open in mail app"
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 0,
-              color: 'var(--muted)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.3rem',
-              fontSize: '0.7rem',
-              textDecoration: 'none',
-              fontFamily: 'inherit',
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-            mailto
+          <a className="email-action" href={`mailto:${EMAIL}`}>
+            <span aria-hidden="true" className="email-mail-arrow">↗</span>
+            open mail
           </a>
         </div>
+        <p className="email-feedback" role="status">{status === 'error' ? 'Copy unavailable. Select the address above to copy it.' : status === 'copied' ? 'Ready when you are.' : '\u00a0'}</p>
       </div>
-
-    </div>
+    </dialog>
   );
 }

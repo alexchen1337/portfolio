@@ -1,23 +1,21 @@
 'use client';
 
+import ElasticArrow from './ElasticArrow';
+
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import EmailPopup from './EmailPopup';
 import HalftoneName from './HalftoneName';
 
-const EXPERIENCES: Array<
-  | { kind: 'affiliation'; href: string; logo?: string; role: string; company: string; date: string }
-  | { kind: 'plain'; label: string; date: string }
-> = [
-  { kind: 'affiliation', href: 'https://www.melius.com', logo: '/melius.png', role: 'member of technical staff', company: 'melius', date: 'jun 2026' },
-  { kind: 'affiliation', href: 'https://www.google.com', logo: '/google.png', role: 'software eng intern', company: 'google', date: 'mar 2026 — jun 2026' },
-  { kind: 'affiliation', href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', role: 'researcher', company: 'marci lab', date: 'nov 2025 — feb 2026' },
-  { kind: 'affiliation', href: 'https://www.asknexus.ai/', logo: '/nexus.png', role: 'software eng intern', company: 'nexus', date: 'mar 2025 — aug 2025' },
-];
+import FrierenCompanion from './FrierenCompanion';
+import ExperienceLink, { type Experience } from './ExperienceLink';
 
-const SPOTIFY_PROFILE =
-  'https://open.spotify.com/user/6z3faxr3uj7zcwdr2idhbsxmy?si=e1d22e4bbd0e439a';
+const EXPERIENCES: Experience[] = [
+  { href: 'https://www.melius.com', logo: '/melius.png', role: 'member of technical staff', company: 'melius', date: 'jun 2026' },
+  { href: 'https://www.google.com', logo: '/google.png', role: 'software eng intern', company: 'google', date: 'mar 2026 — jun 2026' },
+  { href: 'https://marci.eecs.utk.edu/index.html', logo: '/marci.png', role: 'researcher', company: 'marci lab', date: 'nov 2025 — feb 2026' },
+  { href: 'https://www.asknexus.ai/', logo: '/nexus.png', role: 'software eng intern', company: 'nexus', date: 'mar 2025 — aug 2025' },
+];
 
 export default function HomeClient() {
   const [showEmailPopup, setShowEmailPopup] = useState(false);
@@ -65,62 +63,13 @@ export default function HomeClient() {
           </nav>
         </div>
 
-        <a
-          href={SPOTIFY_PROFILE}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="home-page__avatar-link"
-          aria-label="Alex on Spotify"
-        >
-          <Image
-            src="/frieren-spinning.gif"
-            alt="Frieren spinning"
-            width={200}
-            height={179}
-            className="home-page__avatar"
-            priority
-            unoptimized
-          />
-        </a>
+        <FrierenCompanion />
       </div>
 
       {/* exp */}
       <div className="home-section home-section--stack">
         <span className="section-label home-section__label-pad">// exp</span>
-        {EXPERIENCES.map((exp, i) =>
-          exp.kind === 'affiliation' ? (
-            <a
-              key={i}
-              href={exp.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home-experience-row home-experience-row--link"
-              aria-label={`${exp.role} at ${exp.company}, ${exp.date}`}
-            >
-              <span className="home-experience-row__left">
-                <span className="home-experience-row__affiliation">
-                  <span className="home-experience-row__role">{exp.role}</span>
-                  <span className="home-experience-row__company">
-                    <span>{exp.company}</span>
-                    {exp.logo && (
-                      <span className="affiliation-logo-wrap" aria-hidden>
-                        <img src={exp.logo} alt="" className="affiliation-logo" />
-                      </span>
-                    )}
-                  </span>
-                </span>
-              </span>
-              <span className="list-meta home-experience-row__date">{exp.date}</span>
-            </a>
-          ) : (
-            <div key={i} className="home-experience-row">
-              <span className="home-experience-row__left">
-                <span className="home-experience-row__plain">{exp.label}</span>
-              </span>
-              <span className="list-meta home-experience-row__date">{exp.date}</span>
-            </div>
-          )
-        )}
+        {EXPERIENCES.map((exp) => <ExperienceLink key={exp.company} experience={exp} />)}
       </div>
 
       {/* misc */}
@@ -130,8 +79,8 @@ export default function HomeClient() {
           <div className="home-section__under-label valorant-home-inner">
             <span>writing</span>
             <span className="valorant-home-sep" aria-hidden>|</span>
-            <Link href="/writings" className="pill-link pill-link--underline">
-              read here
+            <Link href="/writings" className="pill-link pill-link--underline micro-link" data-echo="read here">
+              read here <ElasticArrow />
             </Link>
           </div>
           <div className="home-section__under-label valorant-home-inner">
@@ -141,9 +90,10 @@ export default function HomeClient() {
               href="https://www.youtube.com/@ChiuceVAL/videos"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-link pill-link--underline"
+              className="pill-link pill-link--underline micro-link"
+              data-echo="watch clips"
             >
-              watch clips
+              watch clips <ElasticArrow />
             </a>
           </div>
         </div>

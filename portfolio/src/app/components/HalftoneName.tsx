@@ -33,6 +33,11 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
     let started = false;
     let prepared = false;
     let cancelled = false;
+    let scatterFrame = 0;
+    let scatterLast = 0;
+    let pointer = { x: 0, y: 0, active: false };
+    let pulseUntil = 0;
+    let cloud: Array<{ x: number; y: number; px: number; py: number; vx: number; vy: number; radius: number }> = [];
 
     const draw = (time: number) => {
       const progress = Math.min(1, time / DURATION);
@@ -63,11 +68,13 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
       context.globalAlpha = dotMix;
       context.beginPath();
 
+      if (progress === 1) cloud = [];
       for (let y = DOT_SPACING / 2; y < height; y += DOT_SPACING) {
         for (let x = DOT_SPACING / 2; x < width; x += DOT_SPACING) {
           const alpha = pixels[(Math.floor(y) * width + Math.floor(x)) * 4 + 3] / 255;
           if (alpha < 0.12) continue;
           const radius = Math.sqrt(alpha) * DOT_SPACING * 0.5;
+          if (progress === 1) cloud.push({ x, y, px: x, py: y, vx: 0, vy: 0, radius });
           context.moveTo(x + radius, y);
           context.arc(x, y, radius, 0, Math.PI * 2);
         }
@@ -76,6 +83,53 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
       context.globalAlpha = 1;
       wrapper.dataset.rendered = 'true';
     };
+
+    const scatter = (timestamp: number) => {
+      scatterFrame = 0;
+      if (cancelled || reducedMotion.matches || document.hidden || elapsed < DURATION) return;
+      const step = Math.min(2, (timestamp - scatterLast) / 16.67 || 1);
+      scatterLast = timestamp;
+      let moving = false;
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = ink;
+      context.beginPath();
+      for (const dot of cloud) {
+        const dx = dot.x - pointer.x;
+        const dy = dot.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+        const force = (pointer.active || timestamp < pulseUntil) ? Math.max(0, 1 - distance / 34) : 0;
+        const tx = dot.x + dx / Math.max(1, distance) * force * 9;
+        const ty = dot.y + dy / Math.max(1, distance) * force * 7;
+        dot.vx = (dot.vx + (tx - dot.px) * 0.1 * step) * Math.pow(0.72, step);
+        dot.vy = (dot.vy + (ty - dot.py) * 0.1 * step) * Math.pow(0.72, step);
+        dot.px += dot.vx * step;
+        dot.py += dot.vy * step;
+        moving ||= Math.abs(dot.px - dot.x) + Math.abs(dot.py - dot.y) + Math.abs(dot.vx) + Math.abs(dot.vy) > 0.03;
+        context.moveTo(dot.px + dot.radius, dot.py);
+        context.arc(dot.px, dot.py, dot.radius, 0, Math.PI * 2);
+      }
+      context.fill();
+      if (pointer.active || timestamp < pulseUntil || moving) scatterFrame = requestAnimationFrame(scatter);
+    };
+    const wakeScatter = () => {
+      if (!scatterFrame && !reducedMotion.matches && elapsed === DURATION) {
+        scatterLast = performance.now();
+        scatterFrame = requestAnimationFrame(scatter);
+      }
+    };
+    const move = (event: PointerEvent) => {
+      const bounds = wrapper.getBoundingClientRect();
+      pointer = { x: event.clientX - bounds.left, y: event.clientY - bounds.top, active: event.pointerType === 'mouse' };
+      if (event.pointerType !== 'mouse') pulseUntil = performance.now() + 250;
+      wakeScatter();
+    };
+    const leave = () => { pointer.active = false; wakeScatter(); };
+    const focus = () => { pointer = { x: width / 2, y: height / 2, active: true }; wakeScatter(); };
+    wrapper.addEventListener('pointermove', move);
+    wrapper.addEventListener('pointerdown', move);
+    wrapper.addEventListener('pointerleave', leave);
+    wrapper.addEventListener('focus', focus);
+    wrapper.addEventListener('blur', leave);
 
     const animate = (timestamp: number) => {
       if (cancelled) return;
@@ -127,6 +181,9 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
     const settle = () => {
       if (!reducedMotion.matches && !document.hidden) return;
       window.cancelAnimationFrame(frameId);
+      window.cancelAnimationFrame(scatterFrame);
+      scatterFrame = 0;
+      pointer.active = false;
       started = true;
       elapsed = DURATION;
       if (prepared) draw(elapsed);
@@ -144,6 +201,12 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
 
     return () => {
       cancelled = true;
+      cancelAnimationFrame(scatterFrame);
+      wrapper.removeEventListener('pointermove', move);
+      wrapper.removeEventListener('pointerdown', move);
+      wrapper.removeEventListener('pointerleave', leave);
+      wrapper.removeEventListener('focus', focus);
+      wrapper.removeEventListener('blur', leave);
       window.cancelAnimationFrame(frameId);
       revealObserver.disconnect();
       resizeObserver.disconnect();
@@ -153,7 +216,7 @@ export default function HalftoneName({ variant = 'home' }: { variant?: 'home' | 
   }, []);
 
   return (
-    <span ref={wrapperRef} className={`home-page__name home-page__name--${variant}`} role="img" aria-label={NAME}>
+    <span ref={wrapperRef} className={`home-page__name home-page__name--${variant}`} role="img" aria-label={NAME} tabIndex={variant === 'home' ? 0 : undefined}>
       <span className="home-page__name-fallback" aria-hidden="true">{NAME}</span>
       <canvas ref={canvasRef} className="home-page__name-canvas" aria-hidden="true" />
     </span>

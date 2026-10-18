@@ -24,13 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={jetbrainsMono.variable} suppressHydrationWarning>
-        <HalftoneWaves />
         <div className="container">
           <Header />
           <main className="main-content">
             {children}
           </main>
         </div>
+        <HalftoneWaves />
         <Analytics />
       </body>
     </html>
